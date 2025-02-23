@@ -7,3 +7,13 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.swiper-slide {
+  width: fit-content !important;
+}
+
+.swiper-wrapper {
+  -webkit-transition-timing-function: linear !important;
+  transition-timing-function: linear !important;
+  position: relative;
+}

@@ -63,7 +63,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="flex gap-4 mt-11 ">
-        <div className="underline bg-[#FFFFFF33] h-[1px] w-[90%] self-end"></div>
+        <div className="underline bg-[#FFFFFF33] h-[1px] w-[85%] self-end"></div>
         <p className="font-medium">I’m at work, reach out </p>
       </div>
     </footer>

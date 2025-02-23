@@ -25,9 +25,9 @@ const social = [
 
 const Header = () => {
   return (
-    <header className="flex items-center text-white px-12 py-12 gap-52 font-creatoDisplay">
+    <header className="flex items-center text-white px-12 py-12 gap-64 font-creatoDisplay">
       <div className="flex items-center gap-3 ">
-        <div className="w-[47px] h-[47px] rounded-lg">
+        <div className="w-[47px] h-[47px] bg-gradient-to-tr from-[#22F890] p-[1px] to-[#FFD027] rounded-lg">
           <Image
             src={Munah}
             width={47}

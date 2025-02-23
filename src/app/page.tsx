@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Message from "../../public/message.svg";
+import ProjectSwiper from "@/components/ProjectSwiper";
 
 export default function Home() {
   return (
@@ -36,7 +37,9 @@ export default function Home() {
         </h1>
       </div>
 
-      <div className="px-12 py-16"></div>
+      <div className="pl-12 py-16">
+        <ProjectSwiper />
+      </div>
     </main>
   );
 }

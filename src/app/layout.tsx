@@ -3,6 +3,11 @@ import "./globals.css";
 import localFont from "next/font/local";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/autoplay";
+import "swiper/css/navigation";
+import "swiper/css/free-mode";
 
 const CreatoDisplay = localFont({
   src: [
