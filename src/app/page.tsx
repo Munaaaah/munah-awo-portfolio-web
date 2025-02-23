@@ -37,7 +37,7 @@ export default function Home() {
         </h1>
       </div>
 
-      <div className="pl-12 py-16">
+      <div className="pl-12">
         <ProjectSwiper />
       </div>
     </main>

@@ -25,7 +25,7 @@ const social = [
 
 const Footer = () => {
   return (
-    <footer className="text-white px-12 py-12 font-creatoDisplay">
+    <footer className="text-white px-12 py-20 font-creatoDisplay">
       <div className="flex items-end gap-96">
         <h4 className="font-black text-[4.5rem] leading-none">SAY HI!</h4>
 
