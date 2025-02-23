@@ -100,7 +100,7 @@ const ProjectSwiper = () => {
           swiperRef.current = swiper;
         }}
         modules={[Pagination, FreeMode, Navigation]}
-        className="pt-[32px] pb-[172px] mySwiper mt-20 pl-12"
+        className="pt-[32px] pb-[64px] mySwiper mt-20 pl-12"
         style={{
           "--swiper-pagination-color": "none",
           "--swiper-pagination-bullet-inactive-color": "none",
