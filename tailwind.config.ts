@@ -8,9 +8,8 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      fontFamily: {
+        creatoDisplay: ["var(--font-CreatoDisplay)"],
       },
     },
   },
