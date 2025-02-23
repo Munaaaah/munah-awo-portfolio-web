@@ -5,12 +5,11 @@ import Message from "../../../../public/message.svg";
 const ProjectDetails = () => {
   return (
     <main className="text-white font-creatoDisplay">
-      <div className="px-12 flex gap-4 ">
+      <section className="px-12 flex gap-4 ">
         <div className="pt-10 border-t border-r border-l-0 border-b-0 w-[70%]  border-[#FFFFFF33] h-[21px] rounded-lg">
-          <p className="font-medium text-[1.5rem]">
-            I’m a product designer with 3 years of experience designing &
-            building products for <br /> startups & enterprises.
-          </p>
+          <h1 className="uppercase font-black leading-none text-[13rem]">
+            Genese
+          </h1>
         </div>
 
         <div className="border-[2px] border-[#3B3B3B] h-[168px] w-[232px] rounded-lg p-3 text-white flex flex-col justify-center">
@@ -23,13 +22,7 @@ const ProjectDetails = () => {
             </button>
           </div>
         </div>
-      </div>
-
-      <div className="px-12">
-        <h1 className="uppercase font-black leading-none text-[13rem]">
-          Genese
-        </h1>
-      </div>
+      </section>
     </main>
   );
 };
