@@ -6,14 +6,14 @@ export default function Home() {
   return (
     <main className="text-white font-creatoDisplay">
       <section className="px-12 flex gap-4 ">
-        <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full  border-[#FFFFFF33] h-[21px] rounded-lg">
-          <p className="font-medium text-[1.5rem]">
+        <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full  border-[#FFFFFF33] lg:h-[21px] h-[16px] rounded-lg">
+          <p className="font-medium text-[1.15rem] lg:text-[1.5rem]">
             I’m a product designer with 3 years of experience designing &
             building products for <br /> startups & enterprises.
           </p>
         </div>
 
-        <div className="border-[2px] border-[#3B3B3B] h-[168px] w-fit rounded-lg p-3 text-white flex flex-col justify-center">
+        <div className="border-[2px] border-[#3B3B3B]  h-[168px] w-fit rounded-lg p-3 text-white hidden lg:flex flex-col justify-center">
           <p>
             Let’s collaborate and make great stuffs. <br /> Reach out to me
             today !
@@ -31,8 +31,8 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="px-12">
-        <h1 className="uppercase font-black leading-none text-[13rem]">
+      <div className="px-12 lg:mt-0 mt-28">
+        <h1 className="uppercase font-black leading-none text-[4.37rem] lg:text-[13rem]">
           I’m <br /> talented{" "}
         </h1>
       </div>

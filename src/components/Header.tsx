@@ -37,12 +37,14 @@ const Header = () => {
           />
         </div>
         <div className="font-medium ">
-          <h4 className="text-[1.5rem]">Awotundun Maimunah </h4>
-          <p className="text-[#AAAAAA] ">Product Designer </p>
+          <h4 className="lg:text-[1.5rem]">Awotundun Maimunah </h4>
+          <p className="text-[#AAAAAA] text-[12px] lg:text-[1rem]">
+            Product Designer{" "}
+          </p>
         </div>
       </div>
 
-      <div className="flex items-end gap-32 font-medium">
+      <div className="lg:flex items-end gap-32 font-medium hidden ">
         <div className="flex flex-col gap-6">
           <p className="text-[#AAAAAA] font-medium">Services </p>
 

@@ -28,7 +28,8 @@ const projects = [
     bgImg: Genese,
     projectName: "Genese",
     description: "Development Agency",
-    project: "../../public/genese.mov",
+    project:
+      "https://res.cloudinary.com/worldsalt/video/upload/v1740550018/genese_yrfclh.mov",
     type: "video",
     tag: ["Agency"],
   },
@@ -36,7 +37,8 @@ const projects = [
     bgImg: Finovapath,
     projectName: "Finovapath",
     description: "Financial Wellness Platform",
-    project: EshanliProject,
+    project:
+      "https://res.cloudinary.com/worldsalt/video/upload/v1740550916/finovapath_shnqwc.mov",
     type: "video",
     tag: ["Web Application ", "Website"],
   },
@@ -44,7 +46,8 @@ const projects = [
     bgImg: ChurchDash,
     projectName: "ChurchDash",
     description: "Build your church app in minutes",
-    project: "../../public",
+    project:
+      "https://res.cloudinary.com/worldsalt/video/upload/v1740550895/churchDash_h5zmht.mov",
     type: "video",
     tag: ["Web Application ", "Mobile"],
   },
@@ -110,11 +113,11 @@ const ProjectSwiper = () => {
         {projects.map((item, index) => (
           <SwiperSlide
             key={index}
-            className=" lg:w-[565px] lg:h-[684px] w-[365px] h-[404px] font-medium cursor-pointer relative"
+            className=" lg:w-[565px] lg:h-[684px] w-[365px] h-[417px] font-medium cursor-pointer relative"
           >
             <div className="bg-[#00000033] absolute top-0 left-0 w-full h-full"></div>
             <div
-              className="lg:w-[565px] lg:h-[684px] w-[365px] h-[404px] bg-no-repeat bg-cover bg-top  z-[999]"
+              className="lg:w-[565px] lg:h-[684px] w-[365px] h-[417px] bg-no-repeat bg-cover bg-top  z-[999]"
               style={{
                 backgroundImage: `url(${item.bgImg.src})`,
               }}
@@ -122,13 +125,17 @@ const ProjectSwiper = () => {
               <div className="absolute z-[999] w-full h-full left-0 p-[18px] flex flex-col  ">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h5>{item.projectName}</h5>
-                    <p className="text-[12px]">{item.description}</p>
+                    <h5 className="lg:text-[16px] text-[10px]">
+                      {item.projectName}
+                    </h5>
+                    <p className="lg:text-[12px] text-[7px]">
+                      {item.description}
+                    </p>
                   </div>
                   <div className="flex gap-2">
                     {item.tag.map((item, index) => (
                       <span
-                        className="border-white border px-2 py-2 text-[14px] rounded-lg"
+                        className="border-white border px-2 py-2 lg:text-[14px] text-[8px] rounded-lg"
                         key={index}
                       >
                         {item}
@@ -138,16 +145,22 @@ const ProjectSwiper = () => {
                 </div>
                 <div className="flex items-center justify-center h-full  self-center">
                   {item.type === "image" ? (
-                    <Image
-                      src={item.project}
-                      alt={item.projectName}
-                      width={228}
-                      height={464}
-                    />
+                    <div className="lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]">
+                      <Image
+                        src={item.project}
+                        alt={item.projectName}
+                        width={228}
+                        height={464}
+                      />
+                    </div>
                   ) : (
                     <video
                       src={item.project}
-                      className="w-[468px] h-[260px] border"
+                      autoPlay
+                      muted
+                      playsInline
+                      loop
+                      className="w-[468px] h-[260px] "
                     />
                   )}
                 </div>

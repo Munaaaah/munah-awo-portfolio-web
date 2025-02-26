@@ -25,12 +25,14 @@ const social = [
 
 const Footer = () => {
   return (
-    <footer className="text-white px-12 py-20 font-creatoDisplay">
-      <div className="flex items-end gap-96">
-        <h4 className="font-black text-[4.5rem] leading-none">SAY HI!</h4>
+    <footer className="text-white px-12 lg:py-20 py-14 font-creatoDisplay">
+      <div className="flex lg:items-end flex-col lg:flex-row lg:gap-96 gap-16">
+        <h4 className="font-black text-[3rem] lg:text-[4.5rem] leading-none">
+          SAY HI!
+        </h4>
 
-        <div className="flex items-end gap-32">
-          <div className="flex flex-col gap-16">
+        <div className="flex lg:items-end gap-10 lg:gap-32 flex-col lg:flex-row">
+          <div className="flex flex-col lg:gap-16 gap-10">
             <p>
               Thanks for looking around. <br /> Stay in touch{" "}
             </p>
@@ -62,8 +64,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-4 mt-11 ">
-        <div className="underline bg-[#FFFFFF33] h-[1px] w-[85%] self-end"></div>
+      <div className="flex lg:gap-4 gap-6 mt-11 flex-col lg:flex-row">
+        <div className="underline bg-[#FFFFFF33] h-[1px] lg:w-[85%] w-full lg:self-end"></div>
         <p className="font-medium">I’m at work, reach out </p>
       </div>
     </footer>
