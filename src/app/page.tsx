@@ -5,7 +5,7 @@ import ProjectSwiper from "@/components/ProjectSwiper";
 export default function Home() {
   return (
     <main className="text-white font-creatoDisplay">
-      <section className="px-12 flex gap-4 ">
+      <section className="p-6 lg:px-12 flex gap-4 ">
         <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full  border-[#FFFFFF33] lg:h-[21px] h-[16px] rounded-lg">
           <p className="font-medium text-[1.15rem] lg:text-[1.5rem]">
             I’m a product designer with 3 years of experience designing &
@@ -31,13 +31,13 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="px-12 lg:mt-0 mt-28">
+      <div className="p-6 lg:px-12 lg:mt-0 mt-28">
         <h1 className="uppercase font-black leading-none text-[4.37rem] lg:text-[13rem]">
           I’m <br /> talented{" "}
         </h1>
       </div>
 
-      <div className="pl-12">
+      <div className="lg:pl-12 pl-6">
         <ProjectSwiper />
       </div>
     </main>
