@@ -127,8 +127,9 @@ const ProjectSwiper = () => {
             className=" lg:w-[565px] lg:h-[684px] w-[365px] h-[417px] font-medium cursor-pointer relative"
           >
             <div className="bg-[#00000033] absolute top-0 left-0 w-full h-full"></div>
-            <div
-              className="lg:w-[565px] lg:h-[684px] w-[365px] h-[417px] bg-no-repeat bg-cover bg-top  z-[999]"
+            <Link
+              href={`/project/${item.projectName}`}
+              className="lg:w-[565px] lg:h-[684px] w-[365px] h-[417px] bg-no-repeat bg-cover block bg-top  z-[999]"
               style={{
                 backgroundImage: `url(${item.bgImg.src})`,
               }}
@@ -176,7 +177,7 @@ const ProjectSwiper = () => {
                   )}
                 </div>
               </div>
-            </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
