@@ -61,12 +61,12 @@ const projects = [
   },
 ];
 
-const ProjectSwiper = () => {
+const OtherProjects = () => {
   const swiperRef = useRef();
   return (
-    <section className=" text-white pt-6 pb-24">
-      <div className="flex justify-end  lg:px-12 px-6">
-        <div className="flex items-center justify-end gap-12">
+    <section className=" text-white pt-6 pb-24 mt-24">
+      <div className="flex justify-start  ">
+        {/* <div className="flex items-center justify-end gap-12">
           <div
             onClick={() => swiperRef.current?.slidePrev()}
             className="cursor-pointer"
@@ -94,7 +94,9 @@ const ProjectSwiper = () => {
               className="lg:w-[32px] lg:h-[32px] w-[24px] h-[24px]"
             />
           </div>
-        </div>
+        </div> */}
+
+        <h5 className="font-medium">Other Works</h5>
       </div>
       <Swiper
         // slidesPerView={width <= 1024 ? 1 : 3}
@@ -106,14 +108,11 @@ const ProjectSwiper = () => {
         }}
         mousewheel={true}
         keyboard={true}
-        speed={10000}
-        loop={true}
-        autoplay={{ delay: 0 }}
         // allowTouchMove={true}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
-        modules={[Pagination, Navigation, Autoplay]}
+        modules={[Pagination, Navigation]}
         className="pt-[24px] pb-[32px] mySwiper mt-12"
         style={{
           "--swiper-pagination-color": "none",
@@ -184,4 +183,4 @@ const ProjectSwiper = () => {
   );
 };
 
-export default ProjectSwiper;
+export default OtherProjects;

@@ -4,7 +4,7 @@ import ProjectSwiper from "@/components/ProjectSwiper";
 
 export default function Home() {
   return (
-    <main className="text-white font-creatoDisplay">
+    <main className="text-white font-creatoDisplay bg-[#191919]">
       <section className="p-6 lg:px-12 flex flex-col lg:flex-row lg:gap-4 gap-32 ">
         <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full  border-[#FFFFFF33] lg:h-[21px] h-[16px] rounded-lg">
           <p className="font-medium text-[1.15rem] lg:text-[1.5rem]">
