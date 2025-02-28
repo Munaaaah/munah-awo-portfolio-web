@@ -64,14 +64,20 @@ const projects = [
 const ProjectSwiper = () => {
   const swiperRef = useRef();
   return (
-    <section className=" text-white pt-12 pb-24">
+    <section className=" text-white pt-6 pb-24">
       <div className="flex justify-end  lg:px-12 px-6">
         <div className="flex items-center justify-end gap-12">
           <div
             onClick={() => swiperRef.current?.slidePrev()}
             className="cursor-pointer"
           >
-            <Image src={ArrowLeft} alt={"arrow left"} width={32} height={32} />
+            <Image
+              src={ArrowLeft}
+              alt={"arrow left"}
+              width={32}
+              height={32}
+              className="lg:w-[32px] lg:h-[32px] w-[24px] h-[24px]"
+            />
           </div>
 
           <div
@@ -85,6 +91,7 @@ const ProjectSwiper = () => {
               alt={"arrow right"}
               width={32}
               height={32}
+              className="lg:w-[32px] lg:h-[32px] w-[24px] h-[24px]"
             />
           </div>
         </div>
@@ -103,7 +110,7 @@ const ProjectSwiper = () => {
           swiperRef.current = swiper;
         }}
         modules={[Pagination, FreeMode, Navigation]}
-        className="pt-[32px] pb-[64px] mySwiper mt-20"
+        className="pt-[24px] pb-[32px] mySwiper mt-12"
         style={{
           "--swiper-pagination-color": "none",
           "--swiper-pagination-bullet-inactive-color": "none",
