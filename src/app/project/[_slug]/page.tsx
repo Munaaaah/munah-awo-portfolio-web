@@ -13,22 +13,22 @@ import Link from "next/link";
 import { parseContentfulContentImage } from "@/app/contentful/contentImage";
 import DisplayComponent from "@/components/DisplayComponent";
 
-let type = "video";
+// let type = "video";
 
-interface ProjectPageParams {
-  _slug: string;
-}
+// interface ProjectPageParams {
+//   _slug: string;
+// }
 
-interface ProjectPageProps {
-  params: ProjectPageParams;
-}
+// interface ProjectPageProps {
+//   params: ProjectPageParams;
+// }
 
-export async function generateStaticParams(): Promise<ProjectPageParams[]> {
+export async function generateStaticParams(): Promise<any[]> {
   const projects = await getProjectDetails();
   return projects;
 }
 
-const ProjectDetails = async ({ params }: ProjectPageProps) => {
+const ProjectDetails = async ({ params }: any) => {
   const data: any = await getSlugDetails("projectCard", params?._slug);
 
   console.log(data);

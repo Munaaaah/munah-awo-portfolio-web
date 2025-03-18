@@ -115,9 +115,9 @@ const OtherProjects = ({ otherProjects }) => {
                   {!fields.videoLink ? (
                     <div className="lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]">
                       <Image
-                        src={
+                        src={`https:${
                           parseContentfulContentImage(fields?.projectImage).src
-                        }
+                        }`}
                         alt={
                           parseContentfulContentImage(fields?.projectImage).alt
                         }
