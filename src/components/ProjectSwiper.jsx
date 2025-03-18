@@ -14,6 +14,7 @@ import PathpalProject from "../../public/pathpal.png";
 import Pathpal from "../../public/pathpal-bg-img.jpg";
 import ChurchDash from "../../public/churchDash-bg-img.jpg";
 import Finovapath from "../../public/Finovapath-bg-img.jpg";
+import { parseContentfulContentImage } from "@/app/contentful/contentImage";
 
 const projects = [
   {
@@ -61,7 +62,8 @@ const projects = [
   },
 ];
 
-const ProjectSwiper = () => {
+const ProjectSwiper = ({ projectSlider }) => {
+  console.log(projectSlider);
   const swiperRef = useRef();
   return (
     <section className=" text-white pt-6 pb-24">
@@ -121,31 +123,33 @@ const ProjectSwiper = () => {
           "--swiper-pagination-bullet-inactive-opacity": "0",
         }}
       >
-        {projects.map((item, index) => (
+        {projectSlider?.map(({ fields }, index) => (
           <SwiperSlide
             key={index}
             className=" lg:w-[565px] lg:h-[684px] w-[365px] h-[417px] font-medium cursor-pointer relative"
           >
             <div className="bg-[#00000033] absolute top-0 left-0 w-full h-full"></div>
             <Link
-              href={`/project/${item.projectName}`}
+              href={`/project/${fields.slug}`}
               className="lg:w-[565px] lg:h-[684px] w-[365px] h-[417px] bg-no-repeat bg-cover block bg-top  z-[999]"
               style={{
-                backgroundImage: `url(${item.bgImg.src})`,
+                backgroundImage: `url(${`https:${
+                  parseContentfulContentImage(fields?.backgroundImage).src
+                }`})`,
               }}
             >
               <div className="absolute z-[999] w-full h-full left-0 p-[18px] flex flex-col  ">
                 <div className="flex items-center justify-between">
                   <div>
                     <h5 className="lg:text-[16px] text-[10px]">
-                      {item.projectName}
+                      {fields.projectName}
                     </h5>
-                    <p className="lg:text-[12px] text-[7px]">
-                      {item.description}
+                    <p className="lg:text-[12px] text-[ 7px]">
+                      {fields.projectType}
                     </p>
                   </div>
                   <div className="flex gap-2">
-                    {item.tag.map((item, index) => (
+                    {fields.tags.map((item, index) => (
                       <span
                         className="border-white border px-2 py-2 lg:text-[14px] text-[8px] rounded-lg"
                         key={index}
@@ -156,18 +160,22 @@ const ProjectSwiper = () => {
                   </div>
                 </div>
                 <div className="flex items-center justify-center h-full  self-center">
-                  {item.type === "image" ? (
+                  {!fields.videoLink ? (
                     <div className="lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]">
                       <Image
-                        src={item.project}
-                        alt={item.projectName}
+                        src={`https:${
+                          parseContentfulContentImage(fields?.projectImage).src
+                        }`}
+                        alt={
+                          parseContentfulContentImage(fields?.projectImage).alt
+                        }
                         width={228}
                         height={464}
                       />
                     </div>
                   ) : (
                     <video
-                      src={item.project}
+                      src={fields.videoLink}
                       autoPlay
                       muted
                       playsInline

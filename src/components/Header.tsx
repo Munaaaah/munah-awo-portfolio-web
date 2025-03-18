@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import Dribbble from "../../public/dribbble.svg";
 import Instagram from "../../public/instagram.svg";
+import LinkedIn from "../../public/linkedIn.svg";
 import Be from "../../public/be.svg";
 import Munah from "../../public/munah-full.jpg";
 const social = [
@@ -20,6 +21,11 @@ const social = [
     logo: Instagram,
     link: "",
     alt: "Instagram",
+  },
+  {
+    logo: LinkedIn,
+    link: "",
+    alt: "LinkedIn",
   },
 ];
 
