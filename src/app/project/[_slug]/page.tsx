@@ -141,7 +141,7 @@ const ProjectDetails = async ({ params }: any) => {
       </section>
 
       <section className=" p-6 lg:pt-16 lg:px-12">
-        <div className="flex justify-between flex-col lg:flex-row lg:gap-4 gap-16">
+        <div className="flex justify-between flex-col lg:flex-row lg:gap-4 gap-16 mb-20">
           {client && (
             <div>
               <h4 className="text-[#AAAAAA] font-medium mb-1">Client </h4>

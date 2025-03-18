@@ -43,7 +43,9 @@ const Header = () => {
           />
         </div>
         <div className="font-medium ">
-          <h4 className="lg:text-[1.5rem]">Awotundun Maimunah </h4>
+          <h4 className="lg:text-[1.4rem] text-nowrap sm:text-[1rem] text-[0.8rem]">
+            Awotundun Maimunah{" "}
+          </h4>
           <p className="text-[#AAAAAA] text-[12px] lg:text-[1rem]">
             Product Designer{" "}
           </p>
@@ -51,7 +53,7 @@ const Header = () => {
       </div>
 
       <div className="lg:flex items-end gap-32 font-medium hidden ">
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col text-nowrap w-fit gap-6">
           <p className="text-[#AAAAAA] font-medium">Services </p>
 
           <Link href="">User Experience Design </Link>
@@ -63,7 +65,7 @@ const Header = () => {
           <Link href="mailto:talk2borlah@gmail.com">talk2borlah@gmail.com</Link>
         </div>
 
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5  text-nowrap">
           <p className="text-[#AAAAAA] font-medium">Find me on </p>
 
           <div className="flex items-center gap-7">
