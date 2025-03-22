@@ -32,7 +32,7 @@ const social = [
 const Header = () => {
   return (
     <header className="flex items-center text-white p-6 lg:px-12 py-12 gap-40 font-creatoDisplay">
-      <div className="flex items-center gap-3 ">
+      <Link href={"/"} className="flex items-center gap-3 ">
         <div className="w-[47px] h-[47px] bg-gradient-to-tr from-[#22F890] p-[1px] to-[#FFD027] rounded-lg">
           <Image
             src={Munah}
@@ -50,7 +50,7 @@ const Header = () => {
             Product Designer{" "}
           </p>
         </div>
-      </div>
+      </Link>
 
       <div className="lg:flex items-end gap-32 font-medium hidden ">
         <div className="flex flex-col text-nowrap w-fit gap-6">

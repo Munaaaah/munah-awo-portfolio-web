@@ -29,7 +29,9 @@ export async function generateStaticParams(): Promise<any[]> {
 }
 
 const ProjectDetails = async ({ params }: any) => {
-  const data: any = await getSlugDetails("projectCard", params?._slug);
+  const { _slug } = await params;
+
+  const data: any = await getSlugDetails("projectCard", _slug);
 
   console.log(data);
 
