@@ -17,15 +17,15 @@ export default function Home() {
   const projectSlider = homeData?.projectSlider;
 
   return (
-    <main className="text-white font-creatoDisplay bg-[#191919]">
-      <section className="p-6 lg:px-12 flex flex-col lg:flex-row lg:gap-4 gap-32 ">
+    <main className="text-white font-creatoDisplay pt-28 bg-[#191919]">
+      <section className="p-6 lg:px-12 flex flex-col lg:flex-row lg:gap-4 gap-24">
         <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full  border-[#FFFFFF33] lg:h-[21px] h-[16px] rounded-lg">
           <p className="font-medium text-[1.15rem] lg:text-[1.5rem] lg:w-[70%]">
             {introduction}
           </p>
         </div>
 
-        <div className="border-[2px] border-[#3B3B3B]  h-[168px] w-fit rounded-lg p-3 text-white flex flex-col justify-center">
+        <div className="border-[2px] border-[#3B3B3B]  h-[168px] lg:w-fit w-full rounded-lg p-3 text-white flex flex-col justify-center">
           <p>{callOutText}</p>
 
           <div className="mt-5 flex items-center gap-3 text-[14px]">

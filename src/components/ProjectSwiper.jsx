@@ -63,10 +63,10 @@ const projects = [
 ];
 
 const ProjectSwiper = ({ projectSlider }) => {
-  console.log(projectSlider);
+  // console.log(projectSlider);
   const swiperRef = useRef();
   return (
-    <section className=" text-white pt-6 pb-24">
+    <section className=" text-white pt-6 pb-18">
       <div className="flex justify-end  lg:px-12 px-6">
         <div className="flex items-center justify-end gap-12">
           <div

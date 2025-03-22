@@ -33,7 +33,7 @@ const ProjectDetails = async ({ params }: any) => {
 
   const data: any = await getSlugDetails("projectCard", _slug);
 
-  console.log(data);
+  // console.log(data);
 
   const projectName = data?.content?.fields?.projectName;
   const tags = data?.content?.fields?.tags;
@@ -54,7 +54,7 @@ const ProjectDetails = async ({ params }: any) => {
   const sections = data?.content?.fields?.sections;
 
   return (
-    <main className="text-white font-creatoDisplay bg-[#191919]">
+    <main className="text-white font-creatoDisplay pt-28 bg-[#191919]">
       <section className="p-6 lg:px-12 flex flex-col lg:flex-row lg:gap-4 gap-32">
         <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full border-[#FFFFFF33] h-[21px] rounded-lg">
           <h1 className="uppercase font-black leading-none text-[4.37rem] lg:text-[8rem]">
@@ -91,7 +91,7 @@ const ProjectDetails = async ({ params }: any) => {
         </div>
       </section>
 
-      <div className="flex lg:items-center flex-col lg:flex-row lg:gap-32 gap-12 lg:mt-32 mt-6 p-6 lg:px-12 w-full">
+      <div className="flex lg:items-center flex-col lg:flex-row lg:gap-32 gap-12 lg:mt-32 p-6 lg:px-12 w-full">
         <div className="flex gap-4 flex-nowrap  ">
           {tags.map((item: string, index: React.Key | null | undefined) => (
             <span
@@ -113,7 +113,7 @@ const ProjectDetails = async ({ params }: any) => {
           backgroundImage: `url(${`https:${backgroundImage.src}`})`,
           backgroundPosition: "0px 0px  -150px 0px",
         }}
-        className="h-[784px] mt-20 p-6 bg-no-repeat w-full bg-cover flex items-center justify-center relative bg-[#191919]"
+        className="h-[784px] lg:mt-20 mt-10 p-6 bg-no-repeat w-full bg-cover flex items-center justify-center relative bg-[#191919]"
       >
         <div className="bg-[#00000033] absolute top-0 left-0 w-full h-full"></div>
         <div className="absolute">
