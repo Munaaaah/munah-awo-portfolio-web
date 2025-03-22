@@ -130,7 +130,7 @@ const ProjectSwiper = ({ projectSlider }) => {
           >
             <div className="bg-[#00000033] absolute top-0 left-0 w-full h-full"></div>
             <Link
-              href={`/project/${fields.slug}`}
+              href={`/project/${fields?.slug}`}
               className="lg:w-[565px] lg:h-[684px] w-[365px] h-[417px] bg-no-repeat bg-cover block bg-top  z-[999]"
               style={{
                 backgroundImage: `url(${`https:${
@@ -142,25 +142,26 @@ const ProjectSwiper = ({ projectSlider }) => {
                 <div className="flex items-center justify-between">
                   <div>
                     <h5 className="lg:text-[16px] text-[10px]">
-                      {fields.projectName}
+                      {fields?.projectName}
                     </h5>
                     <p className="lg:text-[12px] text-[ 7px]">
-                      {fields.projectType}
+                      {fields?.projectType}
                     </p>
                   </div>
                   <div className="flex gap-2">
-                    {fields.tags.map((item, index) => (
-                      <span
-                        className="border-white border px-2 py-2 lg:text-[14px] text-[8px] rounded-lg"
-                        key={index}
-                      >
-                        {item}
-                      </span>
-                    ))}
+                    {fields?.tags &&
+                      fields?.tags?.map((item, index) => (
+                        <span
+                          className="border-white border px-2 py-2 lg:text-[14px] text-[8px] rounded-lg capitalize"
+                          key={index}
+                        >
+                          {item}
+                        </span>
+                      ))}
                   </div>
                 </div>
                 <div className="flex items-center justify-center h-full  self-center">
-                  {!fields.videoLink ? (
+                  {!fields?.videoLink ? (
                     <div className="lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]">
                       <Image
                         src={`https:${
@@ -175,7 +176,7 @@ const ProjectSwiper = ({ projectSlider }) => {
                     </div>
                   ) : (
                     <video
-                      src={fields.videoLink}
+                      src={fields?.videoLink}
                       autoPlay
                       muted
                       playsInline

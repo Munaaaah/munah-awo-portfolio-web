@@ -7,7 +7,7 @@ import getContent from "./contentful/getContent";
 
 export default function Home() {
   const { data, error, isLoading }: any = getContent("/", "pageHomepage");
-  console.log(data);
+  // console.log(data);
   const homeData = data?.contents?.fields;
   const heading = homeData?.heading;
   const introduction = homeData?.introduction;

@@ -94,25 +94,26 @@ const OtherProjects = ({ otherProjects }) => {
                 <div className="flex items-center justify-between">
                   <div>
                     <h5 className="lg:text-[16px] text-[10px]">
-                      {fields.projectName}
+                      {fields?.projectName}
                     </h5>
                     <p className="lg:text-[12px] text-[ 7px]">
-                      {fields.projectType}
+                      {fields?.projectType}
                     </p>
                   </div>
                   <div className="flex gap-2">
-                    {fields.tags.map((item, index) => (
-                      <span
-                        className="border-white border px-2 py-2 lg:text-[14px] text-[8px] rounded-lg"
-                        key={index}
-                      >
-                        {item}
-                      </span>
-                    ))}
+                    {fields?.tags &&
+                      fields?.tags?.map((item, index) => (
+                        <span
+                          className="border-white border px-2 py-2 lg:text-[14px] text-[8px] rounded-lg"
+                          key={index}
+                        >
+                          {item}
+                        </span>
+                      ))}
                   </div>
                 </div>
                 <div className="flex items-center justify-center h-full  self-center">
-                  {!fields.videoLink ? (
+                  {!fields?.videoLink ? (
                     <div className="lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]">
                       <Image
                         src={`https:${
@@ -127,7 +128,7 @@ const OtherProjects = ({ otherProjects }) => {
                     </div>
                   ) : (
                     <video
-                      src={fields.videoLink}
+                      src={fields?.videoLink}
                       autoPlay
                       muted
                       playsInline
