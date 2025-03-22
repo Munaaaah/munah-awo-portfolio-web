@@ -36,7 +36,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = React.useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
   return (
-    <header className="flex justify-between lg:justify-start z-[9999999] fixed lg:static w-full items-center bg-[#191919] text-white p-6 lg:px-12 py-8 gap-40 font-creatoDisplay">
+    <header className="flex justify-between lg:justify-start z-[9999999] fixed lg:static items-center w-full bg-[#191919] text-white p-6 lg:px-12 lg:py-8 py-6 gap-40 font-creatoDisplay">
       <Link href={"/"} className="flex items-center gap-3 ">
         <div className="w-[47px] h-[47px] bg-gradient-to-tr from-[#7A46FF] p-[1px] to-[#FFD027] rounded-lg">
           <Image
@@ -47,11 +47,11 @@ const Header = () => {
             className="w-full h-full rounded-lg object-cover"
           />
         </div>
-        <div className="font-medium ">
-          <h4 className="lg:text-[1.4rem] text-nowrap sm:text-[1rem] text-[0.8rem]">
+        <div className="font-medium  w-full ">
+          <h4 className="lg:text-[1.4rem]  leading-[1.1rem] sm:text-[1.1rem] text-[1rem]">
             Awotundun Maimunah{" "}
           </h4>
-          <p className="text-[#AAAAAA] text-[12px] lg:text-[1rem]">
+          <p className="text-[#AAAAAA] sm:text-[12px] lg:text-[1rem] text-[0.6rem]">
             Product Designer{" "}
           </p>
         </div>
@@ -85,12 +85,12 @@ const Header = () => {
 
       <div
         onClick={toggleMenu}
-        className="relative cursor-pointer block lg:hidden"
+        className="relative w-fit cursor-pointer block lg:hidden"
       >
         {showMenu ? (
           <Image src={Close} alt="menu" width={32} height={32} />
         ) : (
-          <p className="underline font-medium text-[1.1rem]">Menu</p>
+          <p className="underline font-medium w-fit text-[1.1rem]">Menu</p>
         )}
       </div>
 

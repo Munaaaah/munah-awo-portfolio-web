@@ -66,7 +66,7 @@ const ProjectSwiper = ({ projectSlider }) => {
   // console.log(projectSlider);
   const swiperRef = useRef();
   return (
-    <section className=" text-white pt-6 pb-18">
+    <section className=" text-white pb-10">
       <div className="flex justify-end  lg:px-12 px-6">
         <div className="flex items-center justify-end gap-12">
           <div
@@ -116,7 +116,7 @@ const ProjectSwiper = ({ projectSlider }) => {
           swiperRef.current = swiper;
         }}
         modules={[Pagination, Navigation, Autoplay]}
-        className="pt-[24px] pb-[32px] mySwiper mt-12"
+        className="pt-[12px] pb-[12px] mySwiper mt-8"
         style={{
           "--swiper-pagination-color": "none",
           "--swiper-pagination-bullet-inactive-color": "none",

@@ -54,7 +54,7 @@ const ProjectDetails = async ({ params }: any) => {
   const sections = data?.content?.fields?.sections;
 
   return (
-    <main className="text-white font-creatoDisplay pt-28 bg-[#191919]">
+    <main className="text-white font-creatoDisplay pt-20 bg-[#191919]">
       <section className="p-6 lg:px-12 flex flex-col lg:flex-row lg:gap-4 gap-32">
         <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full border-[#FFFFFF33] h-[21px] rounded-lg">
           <h1 className="uppercase font-black leading-none text-[4.37rem] lg:text-[8rem]">
