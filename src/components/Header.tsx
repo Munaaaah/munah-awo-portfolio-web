@@ -36,22 +36,26 @@ const Header = () => {
   const [showMenu, setShowMenu] = React.useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
   return (
-    <header className="flex justify-between lg:justify-start z-[9999999] fixed lg:static items-center w-full bg-[#191919] text-white p-6 lg:px-12 lg:py-8 py-6 gap-40 font-creatoDisplay">
-      <Link href={"/"} className="flex items-center gap-3 ">
-        <div className="w-[47px] h-[47px] bg-gradient-to-tr from-[#7A46FF] p-[1px] to-[#FFD027] rounded-lg">
+    <header className="flex justify-between lg:justify-start z-[9999999] items-center w-full bg-[#191919] text-white p-6 lg:px-12 lg:py-8 py-6 gap-40 font-creatoDisplay">
+      <Link
+        onClick={() => setShowMenu(false)}
+        href={"/"}
+        className="flex items-center gap-3 "
+      >
+        <div className="w-[47px] hidden lg:block h-[47px] bg-gradient-to-tr from-[#7A46FF] p-[1px] to-[#FFD027] rounded-lg">
           <Image
             src={Munah}
             width={47}
             height={47}
             alt="maimunah"
-            className="w-full h-full rounded-lg object-cover"
+            className="w-full h-full rounded-lg object-cover "
           />
         </div>
-        <div className="font-medium  w-full ">
-          <h4 className="lg:text-[1.4rem]  leading-[1.1rem] sm:text-[1.1rem] text-[1rem]">
+        <div className="font-medium  w-fit ">
+          <h4 className="lg:text-[1.4rem] text-nowrap leading-[1.1rem] w-fit sm:text-[1.1rem] text-[1rem]">
             Awotundun Maimunah{" "}
           </h4>
-          <p className="text-[#AAAAAA] sm:text-[12px] lg:text-[1rem] text-[0.6rem]">
+          <p className="text-[#AAAAAA] text-[14px] lg:text-[1rem] w-fit">
             Product Designer{" "}
           </p>
         </div>
@@ -96,11 +100,11 @@ const Header = () => {
 
       <div
         style={{
-          height: `${showMenu ? "486px" : "0"}`,
+          height: `${showMenu ? "360px" : "0"}`,
           transition: "height 0.3s ease-in-out",
           visibility: `${showMenu ? "visible" : "hidden"}`,
         }}
-        className="flex flex-col gap-10 font-medium lg:hidden absolute top-24 left-0 bg-[#191919] w-full z-[9999999] p-6 py-10"
+        className="flex flex-col gap-10 font-medium lg:hidden absolute top-24 left-0 bg-[#191919fc] w-full z-[9999999] p-6 py-10"
       >
         <div className="flex flex-col text-nowrap w-fit gap-4">
           <p className="text-[#AAAAAA] font-medium">Services </p>

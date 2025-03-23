@@ -54,10 +54,11 @@ const ProjectDetails = async ({ params }: any) => {
   const sections = data?.content?.fields?.sections;
 
   return (
-    <main className="text-white font-creatoDisplay pt-20 bg-[#191919]">
-      <section className="p-6 lg:px-12 flex flex-col lg:flex-row lg:gap-4 gap-32">
-        <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full border-[#FFFFFF33] h-[21px] rounded-lg">
-          <h1 className="uppercase font-black leading-none text-[4.37rem] lg:text-[8rem]">
+    <main className="text-white font-creatoDisplay  bg-[#191919]">
+      <section className="p-6 lg:px-12 flex flex-col lg:flex-row lg:gap-4 gap-5">
+        <div>
+          <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full border-[#FFFFFF33] h-[21px] rounded-lg"></div>
+          <h1 className="uppercase h-full font-black leading-none lg:w-[70%] text-[4.37rem] break-all lg:text-[8rem]">
             {projectName}
           </h1>
         </div>

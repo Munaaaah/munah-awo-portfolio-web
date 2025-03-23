@@ -9,7 +9,7 @@ const DisplayComponent = ({ sections }: { sections: any }) => {
       {" "}
       {sections?.map(({ fields }: any, index: any) => {
         return fields.image ? (
-          <div className="w-full my-6 lg:my-20" key={index}>
+          <div className="w-full my-6 lg:my-14" key={index}>
             <Image
               src={`https:${parseContentfulContentImage(fields?.image)?.src}`}
               width={parseContentfulContentImage(fields?.image)?.width}

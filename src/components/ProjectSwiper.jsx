@@ -102,7 +102,7 @@ const ProjectSwiper = ({ projectSlider }) => {
         // slidesPerView={width <= 1024 ? 1 : 3}
         slidesPerView={"auto"}
         spaceBetween={24}
-        // freeMode={true}
+        freeMode={true}
         pagination={{
           clickable: true,
         }}
@@ -110,12 +110,12 @@ const ProjectSwiper = ({ projectSlider }) => {
         keyboard={true}
         speed={10000}
         loop={true}
-        autoplay={{ delay: 0 }}
-        // allowTouchMove={true}
+        // autoplay={{ delay: 1000 }}
+        allowTouchMove={true}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
-        modules={[Pagination, Navigation, Autoplay]}
+        modules={[Pagination, Navigation]}
         className="pt-[12px] pb-[12px] mySwiper mt-8"
         style={{
           "--swiper-pagination-color": "none",
