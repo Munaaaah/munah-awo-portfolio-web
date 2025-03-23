@@ -133,7 +133,7 @@ const ProjectDetails = async ({ params }: any) => {
               />
             </div>
           ) : projectWebImage ? (
-            <div className={`lg:w-[468px] lg:h-[260px] w-[468px] h-[260px]`}>
+            <div className={`lg:w-[468px] lg:h-[260px] w-[268px] h-[160px]`}>
               <Image
                 src={
                   `https:${
