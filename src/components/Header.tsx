@@ -9,30 +9,48 @@ import LinkedIn from "../../public/linkedIn.svg";
 import Be from "../../public/be.svg";
 import Munah from "../../public/munah-full.jpg";
 import Close from "../../public/Close-icon.svg";
-const social = [
-  {
-    logo: Dribbble,
-    link: "",
-    alt: "Dribbble",
-  },
-  {
-    logo: Be,
-    link: "",
-    alt: "Be",
-  },
-  {
-    logo: Instagram,
-    link: "",
-    alt: "Instagram",
-  },
-  {
-    logo: LinkedIn,
-    link: "",
-    alt: "LinkedIn",
-  },
-];
+import getContent from "@/app/contentful/getContent";
 
 const Header = () => {
+  const { data, error, isLoading }: any = getContent(
+    "/header",
+    "componentHeader"
+  );
+
+  // console.log(data);
+
+  const name = data?.contents?.fields?.name;
+  const profession = data?.contents?.fields?.profession;
+  const services = data?.contents?.fields?.services;
+  const dribbbleLink = data?.contents?.fields?.dribbbleLink;
+  const behanceLink = data?.contents?.fields?.behanceLink;
+  const contactEmail = data?.contents?.fields?.contactEmail;
+  const instagramLink = data?.contents?.fields?.instagramLink;
+  const linkedinLink = data?.contents?.fields?.linkedinLink;
+
+  const social = [
+    {
+      logo: Dribbble,
+      link: dribbbleLink,
+      alt: "Dribbble",
+    },
+    {
+      logo: Be,
+      link: behanceLink,
+      alt: "Be",
+    },
+    {
+      logo: Instagram,
+      link: instagramLink,
+      alt: "Instagram",
+    },
+    {
+      logo: LinkedIn,
+      link: linkedinLink,
+      alt: "LinkedIn",
+    },
+  ];
+
   const [showMenu, setShowMenu] = React.useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
   return (
@@ -53,10 +71,10 @@ const Header = () => {
         </div>
         <div className="font-medium  w-fit ">
           <h4 className="lg:text-[1.4rem] text-nowrap leading-[1.1rem] w-fit sm:text-[1.1rem] text-[1rem]">
-            Awotundun Maimunah{" "}
+            {name}
           </h4>
           <p className="text-[#AAAAAA] text-[14px] lg:text-[1rem] w-fit">
-            Product Designer{" "}
+            {profession}
           </p>
         </div>
       </Link>
@@ -65,13 +83,13 @@ const Header = () => {
         <div className="flex flex-col text-nowrap w-fit gap-6">
           <p className="text-[#AAAAAA] font-medium">Services </p>
 
-          <Link href="">User Experience Design </Link>
+          <Link href="">{services}</Link>
         </div>
 
         <div className="flex flex-col gap-6">
           <p className="text-[#AAAAAA] font-medium">Contact </p>
 
-          <Link href="mailto:talk2borlah@gmail.com">talk2borlah@gmail.com</Link>
+          <Link href={`mailto:${contactEmail}`}>{contactEmail}</Link>
         </div>
 
         <div className="flex flex-col gap-5  text-nowrap">
@@ -79,7 +97,7 @@ const Header = () => {
 
           <div className="flex items-center gap-7">
             {social.map((item, index) => (
-              <Link href={item.link} key={index}>
+              <Link href={item.link || ""} key={index}>
                 <Image src={item.logo} alt={item.alt} width={32} height={32} />
               </Link>
             ))}
@@ -123,7 +141,7 @@ const Header = () => {
 
           <div className="flex items-center gap-7">
             {social.map((item, index) => (
-              <Link href={item.link} key={index}>
+              <Link target="_blank" href={item.link || ""} key={index}>
                 <Image src={item.logo} alt={item.alt} width={32} height={32} />
               </Link>
             ))}

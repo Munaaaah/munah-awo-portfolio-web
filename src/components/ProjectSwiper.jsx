@@ -2,7 +2,13 @@
 
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, FreeMode, Autoplay } from "swiper/modules";
+import {
+  Pagination,
+  Navigation,
+  FreeMode,
+  Autoplay,
+  EffectFade,
+} from "swiper/modules";
 import Image from "next/image";
 import Link from "next/link";
 import ArrowRight from "../../public/arrow-right.svg";
@@ -108,14 +114,20 @@ const ProjectSwiper = ({ projectSlider }) => {
         }}
         mousewheel={true}
         keyboard={true}
-        speed={10000}
+        speed={20000}
         loop={true}
-        // autoplay={{ delay: 1000 }}
+        autoplay={{
+          delay: 20000,
+          disableOnInteraction: false,
+          reverseDirection: true,
+          waitForTransition: true,
+          pauseOnMouseEnter: true,
+        }}
         allowTouchMove={true}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
-        modules={[Pagination, Navigation]}
+        modules={[Pagination, Navigation, Autoplay, FreeMode, EffectFade]}
         className="pt-[12px] pb-[12px] mySwiper mt-8"
         style={{
           "--swiper-pagination-color": "none",
@@ -161,8 +173,10 @@ const ProjectSwiper = ({ projectSlider }) => {
                   </div>
                 </div>
                 <div className="flex items-center justify-center h-full  self-center">
-                  {!fields?.videoLink ? (
-                    <div className="lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]">
+                  {!fields?.videoLink && !fields?.projectWebImage ? (
+                    <div
+                      className={`lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]`}
+                    >
                       <Image
                         src={`https:${
                           parseContentfulContentImage(fields?.projectImage).src
@@ -170,8 +184,31 @@ const ProjectSwiper = ({ projectSlider }) => {
                         alt={
                           parseContentfulContentImage(fields?.projectImage).alt
                         }
-                        width={228}
-                        height={464}
+                        width={
+                          parseContentfulContentImage(fields?.projectImage)
+                            ?.width
+                        }
+                        height={
+                          parseContentfulContentImage(fields?.projectImage)
+                            ?.height
+                        }
+                      />
+                    </div>
+                  ) : fields?.projectWebImage ? (
+                    <div
+                      className={`lg:w-[468px] lg:h-[260px] w-[468px] h-[260px]`}
+                    >
+                      <Image
+                        src={`https:${
+                          parseContentfulContentImage(fields?.projectWebImage)
+                            .src
+                        }`}
+                        alt={
+                          parseContentfulContentImage(fields?.projectWebImage)
+                            .alt
+                        }
+                        width={468}
+                        height={260}
                       />
                     </div>
                   ) : (

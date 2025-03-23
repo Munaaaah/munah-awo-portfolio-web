@@ -42,6 +42,7 @@ const ProjectDetails = async ({ params }: any) => {
   const figmaPrototypeLink = data?.content?.fields?.figmaPrototypeLink;
   const videoLink = data?.content?.fields?.videoLink;
   const projectImage = data?.content?.fields?.projectImage;
+  const projectWebImage = data?.content?.fields?.projectWebImage;
   const backgroundImage =
     data?.content?.fields?.backgroundImage &&
     parseContentfulContentImage(data?.content?.fields?.backgroundImage);
@@ -56,9 +57,9 @@ const ProjectDetails = async ({ params }: any) => {
   return (
     <main className="text-white font-creatoDisplay  bg-[#191919]">
       <section className="p-6 lg:px-12 flex flex-col lg:flex-row lg:gap-4 gap-5">
-        <div>
+        <div className="w-full">
           <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full border-[#FFFFFF33] h-[21px] rounded-lg"></div>
-          <h1 className="uppercase h-full font-black leading-none lg:w-[70%] text-[4.37rem] break-all lg:text-[8rem]">
+          <h1 className="uppercase h-full font-black leading-none  text-[4.37rem] break-all lg:text-[8rem]">
             {projectName}
           </h1>
         </div>
@@ -118,7 +119,7 @@ const ProjectDetails = async ({ params }: any) => {
       >
         <div className="bg-[#00000033] absolute top-0 left-0 w-full h-full"></div>
         <div className="absolute">
-          {!videoLink ? (
+          {!videoLink && !projectWebImage ? (
             <div className="lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]">
               <Image
                 src={
@@ -128,6 +129,19 @@ const ProjectDetails = async ({ params }: any) => {
                 alt={parseContentfulContentImage(projectImage)?.alt || ""}
                 width={228}
                 height={464}
+              />
+            </div>
+          ) : projectWebImage ? (
+            <div className={`lg:w-[468px] lg:h-[260px] w-[468px] h-[260px]`}>
+              <Image
+                src={
+                  `https:${
+                    parseContentfulContentImage(projectWebImage)?.src || ""
+                  }` || EshanliProject.src
+                }
+                alt={parseContentfulContentImage(projectWebImage)?.alt || ""}
+                width={468}
+                height={260}
               />
             </div>
           ) : (
