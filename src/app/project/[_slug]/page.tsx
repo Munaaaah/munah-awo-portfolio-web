@@ -123,8 +123,9 @@ const ProjectDetails = async ({ params }: any) => {
             <div className="lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]">
               <Image
                 src={
-                  `https:${parseContentfulContentImage(projectImage)?.src}` ||
-                  EshanliProject.src
+                  `https:${
+                    parseContentfulContentImage(projectImage)?.src || ""
+                  }` || EshanliProject.src
                 }
                 alt={parseContentfulContentImage(projectImage)?.alt || ""}
                 width={228}

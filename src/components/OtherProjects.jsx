@@ -113,8 +113,10 @@ const OtherProjects = ({ otherProjects }) => {
                   </div>
                 </div>
                 <div className="flex items-center justify-center h-full  self-center">
-                  {!fields?.videoLink ? (
-                    <div className="lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]">
+                  {!fields?.videoLink && !fields?.projectWebImage ? (
+                    <div
+                      className={`lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]`}
+                    >
                       <Image
                         src={`https:${
                           parseContentfulContentImage(fields?.projectImage).src
@@ -122,8 +124,31 @@ const OtherProjects = ({ otherProjects }) => {
                         alt={
                           parseContentfulContentImage(fields?.projectImage).alt
                         }
-                        width={228}
-                        height={464}
+                        width={
+                          parseContentfulContentImage(fields?.projectImage)
+                            ?.width
+                        }
+                        height={
+                          parseContentfulContentImage(fields?.projectImage)
+                            ?.height
+                        }
+                      />
+                    </div>
+                  ) : fields?.projectWebImage ? (
+                    <div
+                      className={`lg:w-[468px] lg:h-[260px] w-[468px] h-[260px]`}
+                    >
+                      <Image
+                        src={`https:${
+                          parseContentfulContentImage(fields?.projectWebImage)
+                            .src
+                        }`}
+                        alt={
+                          parseContentfulContentImage(fields?.projectWebImage)
+                            .alt
+                        }
+                        width={468}
+                        height={260}
                       />
                     </div>
                   ) : (
