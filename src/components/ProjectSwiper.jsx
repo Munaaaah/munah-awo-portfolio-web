@@ -114,20 +114,20 @@ const ProjectSwiper = ({ projectSlider }) => {
         }}
         mousewheel={true}
         keyboard={true}
-        speed={20000}
+        speed={1000}
         loop={true}
-        autoplay={{
-          delay: 20000,
-          disableOnInteraction: false,
-          reverseDirection: true,
-          waitForTransition: true,
-          pauseOnMouseEnter: true,
-        }}
+        // autoplay={{
+        //   delay: 20000,
+        //   disableOnInteraction: false,
+        //   reverseDirection: true,
+        //   waitForTransition: true,
+        //   pauseOnMouseEnter: true,
+        // }}
         allowTouchMove={true}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
-        modules={[Pagination, Navigation, Autoplay, FreeMode, EffectFade]}
+        modules={[Pagination, Navigation, FreeMode, EffectFade]}
         className="pt-[12px] pb-[12px] mySwiper mt-8"
         style={{
           "--swiper-pagination-color": "none",
@@ -179,10 +179,10 @@ const ProjectSwiper = ({ projectSlider }) => {
                     >
                       <Image
                         src={`https:${
-                          parseContentfulContentImage(fields?.projectImage).src
+                          parseContentfulContentImage(fields?.projectImage)?.src
                         }`}
                         alt={
-                          parseContentfulContentImage(fields?.projectImage).alt
+                          parseContentfulContentImage(fields?.projectImage)?.alt
                         }
                         width={
                           parseContentfulContentImage(fields?.projectImage)

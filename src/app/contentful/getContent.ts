@@ -11,7 +11,7 @@ const getContent = (key: string, content_type: string) => {
   async function fetcher() {
     const res = await client.getEntries({
       content_type,
-      include: 3,
+      include: 5,
     });
 
     // console.log(res);

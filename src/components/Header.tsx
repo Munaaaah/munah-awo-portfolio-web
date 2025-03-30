@@ -17,7 +17,7 @@ const Header = () => {
     "componentHeader"
   );
 
-  // console.log(data);
+  console.log(data);
 
   const name = data?.contents?.fields?.name;
   const profession = data?.contents?.fields?.profession;
@@ -27,6 +27,8 @@ const Header = () => {
   const contactEmail = data?.contents?.fields?.contactEmail;
   const instagramLink = data?.contents?.fields?.instagramLink;
   const linkedinLink = data?.contents?.fields?.linkedinLink;
+  const worksLink = data?.contents?.fields?.worksLink;
+  const discover = data?.contents?.fields?.discover;
 
   const social = [
     {
@@ -80,10 +82,16 @@ const Header = () => {
       </Link>
 
       <div className="lg:flex items-end gap-32 font-medium hidden ">
-        <div className="flex flex-col text-nowrap w-fit gap-6">
+        {/* <div className="flex flex-col text-nowrap w-fit gap-6">
           <p className="text-[#AAAAAA] font-medium">Services </p>
 
           <Link href="">{services}</Link>
+        </div> */}
+
+        <div className="flex flex-col text-nowrap w-fit gap-6">
+          <p className="text-[#AAAAAA] font-medium">Discover</p>
+
+          <Link href={worksLink || ""}>{discover}</Link>
         </div>
 
         <div className="flex flex-col gap-6">

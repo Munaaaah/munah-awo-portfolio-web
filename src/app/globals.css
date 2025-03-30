@@ -12,8 +12,8 @@ body {
   width: fit-content !important;
 }
 
-/* .swiper-wrapper {
+.swiper-wrapper {
   -webkit-transition-timing-function: linear !important;
   transition-timing-function: linear !important;
   position: relative;
-} */
+}
