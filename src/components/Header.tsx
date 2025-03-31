@@ -132,10 +132,16 @@ const Header = () => {
         }}
         className="flex flex-col gap-10 font-medium lg:hidden absolute top-24 left-0 bg-[#191919fc] w-full z-[9999999] p-6 py-10"
       >
-        <div className="flex flex-col text-nowrap w-fit gap-4">
+        {/* <div className="flex flex-col text-nowrap w-fit gap-4">
           <p className="text-[#AAAAAA] font-medium">Services </p>
 
           <Link href="">User Experience Design </Link>
+        </div> */}
+
+        <div className="flex flex-col text-nowrap w-fit gap-6">
+          <p className="text-[#AAAAAA] font-medium">Discover</p>
+
+          <Link href={worksLink || ""}>{discover}</Link>
         </div>
 
         <div className="flex flex-col gap-4">

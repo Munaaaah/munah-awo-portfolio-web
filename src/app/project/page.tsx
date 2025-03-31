@@ -52,16 +52,20 @@ export default function Project() {
           </div>
         </section>
 
-        <section className="text-white p-6 lg:px-12 lg:py-20 mt-6 py-14 font-creatoDisplay grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 lg:gap-y-20 gap-y-10">
+        <section
+          className="text-white p-6 lg:px-12 lg:py-20 mt-6 py-14 font-creatoDisplay 
+grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 
+gap-6 md:gap-8 lg:gap-10"
+        >
           {listOfProjects?.map(({ fields }, index) => (
             <div
               key={index}
-              className=" lg:w-[565px] lg:h-[684px] w-[365px] h-[417px] font-medium cursor-pointer relative"
+              className="  lg:h-[684px] w-[100%] h-[417px] font-medium cursor-pointer relative"
             >
               <div className="bg-[#00000033] absolute top-0 left-0 w-full h-full"></div>
               <Link
                 href={`/project/${fields?.slug}`}
-                className="lg:w-[565px] lg:h-[684px] w-[365px] h-[417px] bg-no-repeat bg-cover block bg-top  z-[999]"
+                className=" lg:h-[684px] w-[100%] h-[417px] bg-no-repeat bg-cover block bg-top  z-[999]"
                 style={{
                   backgroundImage: `url(${`https:${
                     parseContentfulContentImage(fields?.backgroundImage)?.src ||
@@ -69,8 +73,8 @@ export default function Project() {
                   }`})`,
                 }}
               >
-                <div className="absolute z-[999] w-full h-full left-0 p-[18px] flex flex-col  ">
-                  <div className="flex items-center justify-between">
+                <div className="absolute z-[999] w-full h-full left-0 top-0 p-[18px] flex flex-col">
+                  <div className="flex items-center justify-between w-full">
                     <div>
                       <h5 className="lg:text-[16px] text-[10px]">
                         {fields?.projectName}
