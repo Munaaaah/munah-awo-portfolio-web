@@ -120,9 +120,7 @@ gap-6 md:gap-8 lg:gap-10"
                         />
                       </div>
                     ) : fields?.projectWebImage ? (
-                      <div
-                        className={`lg:w-[468px] lg:h-[260px] w-[268px] h-[160px]`}
-                      >
+                      <div className={` lg:h-[260px] h-[160px]`}>
                         <Image
                           src={`https:${
                             parseContentfulContentImage(fields?.projectWebImage)

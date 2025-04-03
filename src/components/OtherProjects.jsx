@@ -136,7 +136,7 @@ const OtherProjects = ({ otherProjects }) => {
                     </div>
                   ) : fields?.projectWebImage ? (
                     <div
-                      className={`lg:w-[468px] lg:h-[260px] w-[268px] h-[160px]`}
+                      className={` w-[268px] h-[160px]`}
                     >
                       <Image
                         src={`https:${
