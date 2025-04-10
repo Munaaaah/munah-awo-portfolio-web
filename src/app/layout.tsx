@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 // import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
+import PageTransition from "@/components/PageTransition";
 
 const CreatoDisplay = localFont({
   src: [
@@ -32,7 +33,7 @@ const CreatoDisplay = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Memunat Portfolio",
+  title: "Maimunah Awotundun - Product Designer",
   description: "User Experience and Interface Designer",
 };
 
@@ -44,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${CreatoDisplay.variable} bg-[#191919] antialiased`}>
-        {children}
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   );
