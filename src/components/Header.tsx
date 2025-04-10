@@ -17,7 +17,7 @@ const Header = () => {
     "componentHeader"
   );
 
-  console.log(data);
+  // console.log(data);
 
   const name = data?.contents?.fields?.name;
   const profession = data?.contents?.fields?.profession;
