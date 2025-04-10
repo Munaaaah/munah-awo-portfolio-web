@@ -57,17 +57,26 @@ const OtherProjects = ({ otherProjects }) => {
         // slidesPerView={width <= 1024 ? 1 : 3}
         slidesPerView={"auto"}
         spaceBetween={24}
-        // freeMode={true}
+        freeMode={true}
         pagination={{
           clickable: true,
         }}
         mousewheel={true}
         keyboard={true}
-        // allowTouchMove={true}
+        speed={1000}
+        loop={true}
+        autoplay={{
+          delay: 10000,
+          disableOnInteraction: false,
+          // reverseDirection: true,
+          waitForTransition: true,
+          pauseOnMouseEnter: true,
+        }}
+        allowTouchMove={true}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
-        modules={[Pagination, Navigation]}
+        modules={[Pagination, Navigation, Autoplay]}
         className="pt-[24px] pb-[32px] mySwiper mt-12"
         style={{
           "--swiper-pagination-color": "none",
@@ -135,9 +144,7 @@ const OtherProjects = ({ otherProjects }) => {
                       />
                     </div>
                   ) : fields?.projectWebImage ? (
-                    <div
-                      className={` w-[268px] h-[160px]`}
-                    >
+                    <div className={` w-[268px] h-[160px]`}>
                       <Image
                         src={`https:${
                           parseContentfulContentImage(fields?.projectWebImage)

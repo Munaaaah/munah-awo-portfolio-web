@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import "swiper/css";
 import "swiper/css/pagination";
-// import "swiper/css/autoplay";
+import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import PageTransition from "@/components/PageTransition";
@@ -44,7 +44,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${CreatoDisplay.variable} bg-[#191919] antialiased`}>
+      <body
+        className={`${CreatoDisplay.variable} bg-[#191919] antialiased overflow-x-hidden`}
+      >
         <PageTransition>{children}</PageTransition>
       </body>
     </html>
