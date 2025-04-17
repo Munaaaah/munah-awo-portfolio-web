@@ -116,18 +116,14 @@ const ProjectSwiper = ({ projectSlider }) => {
         keyboard={true}
         speed={1000}
         loop={true}
-        // autoplay={{
-        //   delay: 20000,
-        //   disableOnInteraction: false,
-        //   reverseDirection: true,
-        //   waitForTransition: true,
-        //   pauseOnMouseEnter: true,
-        // }}
+        autoplay={{
+          delay: 20000,
+        }}
         allowTouchMove={true}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
-        modules={[Pagination, Navigation, FreeMode, EffectFade]}
+        modules={[Pagination, Navigation, FreeMode, EffectFade, Autoplay]}
         className="pt-[12px] pb-[12px] mySwiper mt-8"
         style={{
           "--swiper-pagination-color": "none",
@@ -195,9 +191,7 @@ const ProjectSwiper = ({ projectSlider }) => {
                       />
                     </div>
                   ) : fields?.projectWebImage ? (
-                    <div
-                      className={` w-[268px] h-[160px]`}
-                    >
+                    <div className={` w-[268px] h-[160px]`}>
                       <Image
                         src={`https:${
                           parseContentfulContentImage(fields?.projectWebImage)

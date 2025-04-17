@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export default function PageTransition({
   children,
@@ -10,35 +10,32 @@ export default function PageTransition({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const [showContent, setShowContent] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(true);
 
   useEffect(() => {
-    // Delay rendering the content until after the animation
+    setIsTransitioning(true);
     const timer = setTimeout(() => {
-      setShowContent(true);
-    }, 2000); // adjust to match transition duration
-
-    return () => {
-      clearTimeout(timer);
-      setShowContent(false); // reset when path changes
-    };
+      setIsTransitioning(false);
+    }, 2000); // match this to animation duration
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={pathname}
-        initial={{ y: "-100%", opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: "-100%", opacity: 0 }}
-        transition={{
-          duration: 2, // match this with timeout above
-          ease: [0.76, 0, 0.24, 1],
-        }}
-        className="min-h-screen"
-      >
-        {showContent && children}
-      </motion.div>
-    </AnimatePresence>
+    <>
+      <AnimatePresence mode="wait">
+        {isTransitioning && (
+          <motion.div
+            key={pathname + "-overlay"}
+            initial={{ y: "-100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 2, ease: [0.76, 0, 0.24, 1] }}
+            className="fixed top-0 left-0 w-full h-full bg-black z-[9999]"
+          />
+        )}
+      </AnimatePresence>
+
+      {!isTransitioning && <div className="relative z-0">{children}</div>}
+    </>
   );
 }
