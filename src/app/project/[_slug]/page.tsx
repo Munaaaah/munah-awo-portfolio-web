@@ -36,7 +36,7 @@ const ProjectDetails = async ({ params }: any) => {
 
   const data: any = await getSlugDetails("projectCard", _slug);
 
-  console.log(data);
+  // console.log(data);
 
   if (!data) {
     return <Loading />;

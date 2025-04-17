@@ -14,9 +14,9 @@ export default function PageTransition({
     <AnimatePresence mode="wait">
       <motion.div
         key={pathname}
-        initial={{ y: "-100%", opacity: 0 }}
+        initial={{ y: "100%", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        exit={{ y: "100%", opacity: 0 }}
+        exit={{ y: "-100%", opacity: 0 }}
         transition={{
           duration: 3,
           ease: [0.76, 0, 0.24, 1],

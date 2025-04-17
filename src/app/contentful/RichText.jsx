@@ -66,23 +66,13 @@ function RichText({ document }) {
           {children}
         </h1>
       ),
-      [BLOCKS.UL_LIST]: (node, children) => {
-        return (
-          <ul
-            style={{
-              listStyle: "disc",
-              fontSize: "15px",
-              lineHeight: "30px",
-              marginLeft: "1rem",
-            }}
-          >
-            {children.map((item) => (
-              <li key={item.key}>{item.props.children[0].props.children[0]}</li>
-            ))}
-          </ul>
-        );
-      },
 
+      [BLOCKS.LIST_ITEM]: (node, children) => (
+        <li className="text-[15px] leading-[30px]">{children}</li>
+      ),
+      [BLOCKS.UL_LIST]: (node, children) => (
+        <ul className="list-disc ml-6 space-y-2">{children}</ul>
+      ),
       [INLINES.HYPERLINK]: (node, children) => {
         return (
           <a href={node.data.uri} target="_blank" rel="noopener noreferrer">
