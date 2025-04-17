@@ -7,6 +7,7 @@ import getContent from "./contentful/getContent";
 import Loading from "@/components/Loading";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 export default function Home() {
   const { data, error, isLoading }: any = getContent("/", "pageHomepage");
@@ -30,6 +31,8 @@ export default function Home() {
   const callOutText = homeData?.callOutText;
   const callOutBtn1Text = homeData?.callOutBtn1Text;
   const callOutBtn2Text = homeData?.callOutBtn2Text;
+  const callOutBtn2Url = homeData?.callOutBtn2Url;
+  const callOutBtn1Url = homeData?.callOutBtn1Url;
   const projectSlider = homeData?.projectSlider;
 
   return (
@@ -48,16 +51,24 @@ export default function Home() {
 
             <div className="mt-5 flex items-center gap-3 text-[14px]">
               {callOutBtn1Text ? (
-                <button className="bg-[#7A46FF] rounded-md px-[12px] py-[12px] h-[43px] w-[149px] flex items-center justify-center gap-3 text-center">
+                <Link
+                  target="_blank"
+                  href={`${callOutBtn1Url}` || ""}
+                  className="bg-[#7A46FF] rounded-md px-[12px] py-[12px] h-[43px] w-[149px] flex items-center justify-center gap-3 text-center"
+                >
                   <Image src={Message} width={18} height={18} alt="message" />
                   {callOutBtn1Text}
-                </button>
+                </Link>
               ) : null}
 
               {callOutBtn2Text ? (
-                <button className="bg-[#3B3B3B] rounded-md px-[12px] py-[12px] h-[43px] w-[149px]">
+                <Link
+                  target="_blank"
+                  href={callOutBtn2Url || ""}
+                  className="bg-[#3B3B3B] rounded-md px-[12px] text-center py-[12px] h-[43px] w-[149px]"
+                >
                   {callOutBtn2Text}
-                </button>
+                </Link>
               ) : null}
             </div>
           </div>

@@ -18,7 +18,7 @@ export default function PageTransition({
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: "100%", opacity: 0 }}
         transition={{
-          duration: 1,
+          duration: 3,
           ease: [0.76, 0, 0.24, 1],
         }}
         className="min-h-screen"
