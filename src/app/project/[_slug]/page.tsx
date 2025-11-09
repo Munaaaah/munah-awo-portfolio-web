@@ -15,6 +15,7 @@ import DisplayComponent from "@/components/DisplayComponent";
 import Loading from "@/components/Loading";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Backbtn from "@/components/Backbtn";
 
 // let type = "video";
 
@@ -74,41 +75,58 @@ const ProjectDetails = async ({ params }: any) => {
         <section className="p-6 lg:px-12 flex flex-col lg:flex-row lg:gap-4 gap-5">
           <div className="w-full">
             <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full border-[#FFFFFF33] h-[21px] rounded-lg"></div>
-            <h1 className="uppercase h-full font-black leading-none  text-[4.37rem] break-all lg:text-[8rem]">
-              {projectName}
-            </h1>
-          </div>
 
-          <div className="border-[2px] border-[#3B3B3B] h-[168px]  rounded-lg p-3 text-white flex flex-col justify-center">
-            <p>Important Links</p>
+            <Backbtn />
 
-            <div className="mt-5 flex items-center gap-3 text-[14px]">
-              {liveWebsiteUrl && (
-                <Link
-                  target="_blank"
-                  href={liveWebsiteUrl}
-                  className="bg-[#7A46FF] rounded-md px-[12px] py-[12px] h-[43px] w-[302px] flex items-center justify-center gap-3 text-center"
-                >
-                  <Image src={Message} width={18} height={18} alt="message" />
-                  Visit Live Website
-                </Link>
-              )}
+            <div className="flex max-w-[1440px] w-full mx-auto lg:flex-row flex-col lg:gap-32 gap-16 justify-between items-start px-6 lg:px-10">
+              <h1 className="uppercase font-black leading-none flex-1 text-[2.5rem] sm:text-[3.5rem] lg:text-[6rem] xl:text-[7.5rem]  ">
+                {projectName}
+              </h1>
 
-              {figmaPrototypeLink && (
-                <Link
-                  target="_blank"
-                  href={figmaPrototypeLink}
-                  className="bg-[#3B3B3B] rounded-md px-[12px] py-[12px] h-[43px] w-[302px] flex items-center justify-center gap-3 text-center"
-                >
-                  <Image src={FigmaIcon} width={16} height={24} alt="message" />
-                  View Figma Prototype
-                </Link>
-              )}
+              <div className="border-2 border-[#3B3B3B] rounded-xl p-5 lg:p-6 text-white flex flex-col justify-center w-full max-w-[420px]">
+                <p className="font-semibold text-[16px] tracking-wide mb-3">
+                  Important Links
+                </p>
+
+                <div className="mt-4 flex flex-col sm:flex-row lg:flex-col gap-3 text-sm">
+                  {liveWebsiteUrl && (
+                    <Link
+                      target="_blank"
+                      href={liveWebsiteUrl}
+                      className="bg-[#7A46FF] hover:bg-[#6938e6] transition-colors duration-200 rounded-md px-4 py-3 flex items-center justify-center gap-3 text-center w-full"
+                    >
+                      <Image
+                        src={Message}
+                        width={18}
+                        height={18}
+                        alt="message"
+                      />
+                      Visit Live Website
+                    </Link>
+                  )}
+
+                  {figmaPrototypeLink && (
+                    <Link
+                      target="_blank"
+                      href={figmaPrototypeLink}
+                      className="bg-[#3B3B3B] hover:bg-[#2d2d2d] transition-colors duration-200 rounded-md px-4 py-3 flex items-center justify-center gap-3 text-center w-full"
+                    >
+                      <Image
+                        src={FigmaIcon}
+                        width={16}
+                        height={24}
+                        alt="figma"
+                      />
+                      View Figma Prototype
+                    </Link>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <div className="flex lg:items-center flex-col lg:flex-row lg:gap-32 gap-12 lg:mt-32 p-6 lg:px-12 w-full">
+        <div className="flex lg:items-center justify-between flex-col lg:flex-row lg:gap-32 gap-12 lg:mt-32 p-6 lg:px-12 max-w-[1440px] w-full mx-auto ">
           <div className="flex gap-4 flex-nowrap  ">
             {tags?.map((item: string, index: React.Key | null | undefined) => (
               <span
@@ -120,89 +138,95 @@ const ProjectDetails = async ({ params }: any) => {
             ))}
           </div>
 
-          <div className="w-full">
+          <div className="">
             <p className="font-medium lg:text-[1.5rem] ">{aboutProject}</p>
           </div>
         </div>
 
-        <section
-          style={{
-            backgroundImage: `url(${`https:${backgroundImage?.src} `})`,
-            backgroundPosition: "0px 0px  -150px 0px",
-          }}
-          className="h-[784px] lg:mt-20 mt-10 p-6 bg-no-repeat w-full bg-cover flex items-center justify-center relative bg-[#191919]"
-        >
-          <div className="bg-[#00000033] absolute top-0 left-0 w-full h-full"></div>
-          <div className="absolute">
-            {!videoLink && !projectWebImage ? (
-              <div className="lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]">
-                <Image
-                  src={
-                    `https:${
-                      parseContentfulContentImage(projectImage)?.src || ""
-                    }` || EshanliProject.src
-                  }
-                  alt={parseContentfulContentImage(projectImage)?.alt || ""}
-                  width={228}
-                  height={464}
+        <div className="max-w-[1440px] mx-auto lg:px-12">
+          <section
+            style={{
+              backgroundImage: `url(${`https:${backgroundImage?.src} `})`,
+              backgroundPosition: "0px 0px  -150px 0px",
+            }}
+            className="h-[784px]  rounded-[16px] lg:mt-20 mt-10 p-6 bg-no-repeat w-full bg-cover flex items-center justify-center relative bg-[#191919]"
+          >
+            <div className="bg-[#00000033] absolute top-0 left-0 w-full h-full rounded-[16px]"></div>
+            <div className="absolute">
+              {!videoLink && !projectWebImage ? (
+                <div className="lg:w-[228px] lg:h-[464px] w-[139px] h-[283px]">
+                  <Image
+                    src={
+                      `https:${
+                        parseContentfulContentImage(projectImage)?.src || ""
+                      }` || EshanliProject.src
+                    }
+                    alt={parseContentfulContentImage(projectImage)?.alt || ""}
+                    width={228}
+                    height={464}
+                  />
+                </div>
+              ) : projectWebImage ? (
+                <div className={` w-[268px] h-[160px]`}>
+                  <Image
+                    src={
+                      `https:${
+                        parseContentfulContentImage(projectWebImage)?.src || ""
+                      }` || EshanliProject.src
+                    }
+                    alt={
+                      parseContentfulContentImage(projectWebImage)?.alt || ""
+                    }
+                    width={468}
+                    height={260}
+                  />
+                </div>
+              ) : (
+                <video
+                  src={videoLink}
+                  autoPlay
+                  muted
+                  playsInline
+                  loop
+                  className="w-[576px] h-[348px] "
                 />
-              </div>
-            ) : projectWebImage ? (
-              <div className={` w-[268px] h-[160px]`}>
-                <Image
-                  src={
-                    `https:${
-                      parseContentfulContentImage(projectWebImage)?.src || ""
-                    }` || EshanliProject.src
-                  }
-                  alt={parseContentfulContentImage(projectWebImage)?.alt || ""}
-                  width={468}
-                  height={260}
-                />
-              </div>
-            ) : (
-              <video
-                src={videoLink}
-                autoPlay
-                muted
-                playsInline
-                loop
-                className="w-[576px] h-[348px] "
-              />
-            )}
-          </div>
-        </section>
-
-        <section className=" p-6 lg:pt-16 lg:px-12">
-          <div className="flex justify-between flex-col lg:flex-row lg:gap-4 gap-16 mb-20">
-            {client && (
-              <div>
-                <h4 className="text-[#AAAAAA] font-medium mb-1">Client </h4>
-                <p className="">{client}</p>
-              </div>
-            )}
-
-            {role && (
-              <div>
-                <h4 className="text-[#AAAAAA] font-medium mb-1">My Role</h4>
-                <p className="">{role}</p>
-              </div>
-            )}
-            <div className="lg:w-[50%]">
-              <RichText document={introduction} />
+              )}
             </div>
-          </div>
+          </section>
+        </div>
 
-          <div className="mt-6">
-            <DisplayComponent sections={sections} />
-          </div>
-        </section>
+        <div className="max-w-[1440px] mx-auto lg:px-12">
+          <section className=" p-6 lg:pt-16 lg:px-12">
+            <div className="flex justify-between flex-col lg:flex-row lg:gap-4 gap-16 mb-20">
+              {client && (
+                <div>
+                  <h4 className="text-[#AAAAAA] font-medium mb-1">Client </h4>
+                  <p className="">{client}</p>
+                </div>
+              )}
 
-        {otherProjects && (
+              {role && (
+                <div>
+                  <h4 className="text-[#AAAAAA] font-medium mb-1">My Role</h4>
+                  <p className="">{role}</p>
+                </div>
+              )}
+              <div className="lg:w-[50%]">
+                <RichText document={introduction} />
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <DisplayComponent sections={sections} />
+            </div>
+          </section>
+        </div>
+
+        {/* {otherProjects && (
           <div className="lg:pl-12 pl-6">
             <OtherProjects otherProjects={otherProjects} />
           </div>
-        )}
+        )} */}
       </main>
       <Footer />
     </>
