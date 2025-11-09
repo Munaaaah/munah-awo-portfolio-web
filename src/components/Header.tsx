@@ -56,7 +56,7 @@ const Header = () => {
   const [showMenu, setShowMenu] = React.useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
   return (
-    <header className="flex justify-between lg:justify-start z-[9999999] items-center w-full bg-[#191919] text-white p-6 lg:px-12 lg:py-8 py-6 gap-40 font-creatoDisplay">
+    <header className="flex justify-between  z-[9999999] items-center w-full bg-[#191919] text-white p-6 lg:px-12 lg:py-8 py-6 gap-40 font-creatoDisplay">
       <Link
         onClick={() => setShowMenu(false)}
         href={"/"}
@@ -81,7 +81,7 @@ const Header = () => {
         </div>
       </Link>
 
-      <div className="lg:flex items-end gap-32 font-medium hidden ">
+      <div className="lg:flex items-end gap-32 font-medium hidden justify-between ">
         {/* <div className="flex flex-col text-nowrap w-fit gap-6">
           <p className="text-[#AAAAAA] font-medium">Services </p>
 
