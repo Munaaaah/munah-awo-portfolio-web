@@ -14,7 +14,7 @@ import getContent from "@/app/contentful/getContent";
 const Header = () => {
   const { data, error, isLoading }: any = getContent(
     "/header",
-    "componentHeader"
+    "componentHeader",
   );
 
   // console.log(data);
@@ -55,57 +55,66 @@ const Header = () => {
 
   const [showMenu, setShowMenu] = React.useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
+
+  const navLinks = [
+    { label: "About", href: "/#about" },
+    { label: "Projects", href: "/#projects" },
+    { label: "Crafts", href: "/#crafts" },
+  ];
+
   return (
-    <header className="flex justify-between  z-[9999999] items-center w-full bg-[#191919] text-white p-6 lg:px-12 lg:py-8 py-6 gap-40 font-creatoDisplay">
+    <header className="flex justify-between lg:justify-start z-[9999999] items-center lg:items-start w-full bg-[#09090B] text-white p-6 lg:pl-[52px] lg:pr-6 lg:pt-[59px] lg:pb-8 font-creatoDisplay lg:max-w-[1440px] lg:mx-auto relative">
       <Link
         onClick={() => setShowMenu(false)}
         href={"/"}
-        className="flex items-center gap-3 "
+        className="flex items-center gap-3 lg:mt-[11px] lg:w-[383px] shrink-0"
       >
-        <div className="w-[47px] hidden lg:block h-[47px] bg-gradient-to-tr from-[#7A46FF] p-[1px] to-[#FFD027] rounded-lg">
+        <div className="w-[47px] hidden lg:block h-[48px] border-[0.5px] border-[#7A46FF] rounded-[8px] overflow-hidden">
           <Image
             src={Munah}
             width={47}
-            height={47}
+            height={48}
             alt="maimunah"
-            className="w-full h-full rounded-lg object-cover "
+            className="w-full h-full rounded-[8px] object-cover"
           />
         </div>
-        <div className="font-medium  w-fit ">
-          <h4 className="lg:text-[1.4rem] text-nowrap leading-[1.1rem] w-fit sm:text-[1.1rem] text-[1rem]">
+        <div className="font-medium w-fit">
+          <h4 className="lg:text-[24px] lg:leading-8 lg:tracking-[-0.48px] text-nowrap leading-[1.1rem] w-fit sm:text-[1.1rem] text-[1rem]">
             {name}
           </h4>
-          <p className="text-[#AAAAAA] text-[14px] lg:text-[1rem] w-fit">
+          <p className="text-[#AAAAAA] text-[14px] lg:text-[16px] lg:leading-6 lg:tracking-[-0.32px] w-fit">
             {profession}
           </p>
         </div>
       </Link>
 
-      <div className="lg:flex items-end gap-32 font-medium hidden justify-between ">
-        {/* <div className="flex flex-col text-nowrap w-fit gap-6">
-          <p className="text-[#AAAAAA] font-medium">Services </p>
+      <div className="lg:flex items-start hidden lg:ml-[143px]">
+        <div className="flex flex-col gap-[24px] text-nowrap lg:w-[248px] font-medium">
+          <p className="text-[#AAAAAA] text-[16px] leading-6 tracking-[-0.32px]">
+            Discover
+          </p>
 
-          <Link href="">{services}</Link>
-        </div> */}
-
-        <div className="flex flex-col text-nowrap w-fit gap-6">
-          <p className="text-[#AAAAAA] font-medium">Discover</p>
-
-          <Link href={worksLink || ""}>{discover}</Link>
+          <nav className="flex items-center gap-[30px]">
+            {navLinks.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-white text-[16px] leading-6 tracking-[-0.32px]"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
-        <div className="flex flex-col gap-6">
-          <p className="text-[#AAAAAA] font-medium">Contact </p>
-
-          <Link href={`mailto:${contactEmail}`}>{contactEmail}</Link>
-        </div>
-
-        <div className="flex flex-col gap-5  text-nowrap">
-          <p className="text-[#AAAAAA] font-medium">Find me on </p>
+        <div className="flex flex-col gap-[24px] text-nowrap ml-[220px] font-medium">
+          <p className="text-[#AAAAAA] text-[16px] leading-6 tracking-[-0.32px]">
+            Find me on
+          </p>
 
           <div className="flex items-center gap-7">
             {social.map((item, index) => (
-              <Link href={item.link || ""} key={index}>
+              <Link target="_blank" href={item.link || ""} key={index}>
                 <Image src={item.logo} alt={item.alt} width={32} height={32} />
               </Link>
             ))}
@@ -126,11 +135,11 @@ const Header = () => {
 
       <div
         style={{
-          height: `${showMenu ? "360px" : "0"}`,
+          height: `${showMenu ? "460px" : "0"}`,
           transition: "height 0.3s ease-in-out",
           visibility: `${showMenu ? "visible" : "hidden"}`,
         }}
-        className="flex flex-col gap-10 font-medium lg:hidden absolute top-24 left-0 bg-[#191919fc] w-full z-[9999999] p-6 py-10"
+        className="flex flex-col gap-10 font-medium lg:hidden absolute top-24 left-0 bg-[#09090bfc] w-full z-[9999999] p-6 py-10"
       >
         {/* <div className="flex flex-col text-nowrap w-fit gap-4">
           <p className="text-[#AAAAAA] font-medium">Services </p>
@@ -141,7 +150,15 @@ const Header = () => {
         <div className="flex flex-col text-nowrap w-fit gap-6">
           <p className="text-[#AAAAAA] font-medium">Discover</p>
 
-          <Link href={worksLink || ""}>{discover}</Link>
+          {navLinks.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              onClick={() => setShowMenu(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
 
         <div className="flex flex-col gap-4">

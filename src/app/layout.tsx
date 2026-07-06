@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${CreatoDisplay.variable} bg-[#191919] antialiased overflow-x-hidden`}
+        className={`${CreatoDisplay.variable} bg-[#09090B] antialiased overflow-x-hidden`}
       >
         <PageTransition>{children}</PageTransition>
       </body>
