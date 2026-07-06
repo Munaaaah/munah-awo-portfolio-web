@@ -12,7 +12,7 @@ import getContent from "@/app/contentful/getContent";
 const Footer = () => {
   const { data, error, isLoading }: any = getContent(
     "/footer",
-    "componentFooter"
+    "componentFooter",
   );
 
   // console.log(data);
@@ -50,44 +50,53 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="text-white p-6 lg:px-12 lg:py-20 py-14 font-creatoDisplay">
-      <div className="flex lg:items-end flex-col lg:flex-row lg:gap-96 gap-16">
-        <h4 className="font-black text-[3rem] lg:text-[4.5rem] leading-none">
-          {heading}
-        </h4>
+    <footer className="bg-[#09090B] text-white font-creatoDisplay">
+      <div className="p-6 py-14 lg:p-0 lg:h-[392px] lg:max-w-[1440px] lg:mx-auto">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-0 lg:pl-[50px]">
+          <h4 className="font-medium text-[24px] lg:text-[32px] leading-8 tracking-[-0.64px] lg:w-[420px] lg:pt-[123px]">
+            {heading || "Let’s create something meaningful together"}
+          </h4>
 
-        <div className="flex lg:items-end gap-10 lg:gap-32 flex-col lg:flex-row">
-          <div className="flex flex-col lg:gap-16 gap-10">
-            <p className="w-[70%]">{message}</p>
+          <div className="lg:ml-[132px] lg:pt-[136px]">
+            <p className="text-[16px] leading-6 tracking-[-0.32px] font-medium">
+              Stay in touch
+            </p>
 
-            <div className="flex flex-col gap-6">
-              <p className="text-[#AAAAAA] font-medium">Contact </p>
+            <div className="mt-[27px] flex flex-col lg:flex-row gap-10 lg:gap-0">
+              <div className="flex flex-col gap-[25px] lg:w-[267px] text-[16px] leading-6 tracking-[-0.32px] font-medium">
+                <p className="text-[#AAAAAA]">Contact </p>
 
-              <Link href={`mailto:${contactEmail}`}>{contactEmail}</Link>
-            </div>
-          </div>
+                <Link href={`mailto:${contactEmail}`}>{contactEmail}</Link>
+              </div>
 
-          <div className="flex flex-col gap-5">
-            <p className="text-[#AAAAAA] font-medium">Find me on </p>
+              <div className="flex flex-col gap-4">
+                <p className="text-[#AAAAAA] text-[16px] leading-6 tracking-[-0.32px] font-medium">
+                  Find me on
+                </p>
 
-            <div className="flex items-center gap-7">
-              {social.map((item, index) => (
-                <Link href={item.link || ""} key={index}>
-                  <Image
-                    src={item.logo}
-                    alt={item.alt}
-                    width={32}
-                    height={32}
-                  />
-                </Link>
-              ))}
+                <div className="flex items-center gap-7">
+                  {social.map((item, index) => (
+                    <Link target="_blank" href={item.link || ""} key={index}>
+                      <Image
+                        src={item.logo}
+                        alt={item.alt}
+                        width={32}
+                        height={32}
+                      />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex lg:gap-4 gap-6 mt-11 flex-col lg:flex-row">
-        <div className="underline bg-[#FFFFFF33] h-[1px] lg:w-[75%] w-full lg:self-end"></div>
-        <p className="font-medium">{designedBy} </p>
+
+        <div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-[17px] mt-11 lg:mt-[48px] lg:pl-[50px] lg:pr-[82px]">
+          <div className="bg-[#FFFFFF33] h-[1px] w-full lg:flex-1"></div>
+          <p className="font-medium text-[16px] leading-6 tracking-[-0.32px] text-[#AAAAAA] lg:w-[267px] shrink-0">
+            {designedBy || "Designed and built by Munah and Iyo"}
+          </p>
+        </div>
       </div>
     </footer>
   );

@@ -9,17 +9,20 @@ const DisplayComponent = ({ sections }: { sections: any }) => {
       {" "}
       {sections?.map(({ fields }: any, index: any) => {
         return fields.image ? (
-          <div className="w-full my-6 lg:my-14" key={index}>
+          <div className="w-full lg:w-[610px] my-6 lg:my-[57px]" key={index}>
             <Image
               src={`https:${parseContentfulContentImage(fields?.image)?.src}`}
               width={parseContentfulContentImage(fields?.image)?.width}
               height={parseContentfulContentImage(fields?.image)?.height}
               alt={parseContentfulContentImage(fields?.image)?.alt || ""}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-[24px]"
             />
           </div>
         ) : (
-          <div className="lg:w-[50%] my-6 lg:my-24" key={index}>
+          <div
+            className="w-full lg:w-[628px] my-6 lg:my-[57px] text-[16px] leading-6 tracking-[-0.32px] font-medium"
+            key={index}
+          >
             <RichText document={fields?.richText} />
           </div>
         );

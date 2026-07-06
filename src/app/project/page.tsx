@@ -42,7 +42,7 @@ export default function Project() {
   return (
     <>
       <Header />
-      <main className="text-white font-creatoDisplay  bg-[#191919]">
+      <main className="text-white font-creatoDisplay  bg-[#09090B]">
         <section className="p-6 lg:px-12 flex flex-col lg:flex-row lg:gap-4 gap-5">
           <div className="w-full">
             <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full border-[#FFFFFF33] h-[21px] rounded-lg"></div>
