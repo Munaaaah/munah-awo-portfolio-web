@@ -1,20 +1,21 @@
 import React from "react";
-import getSlugDetails, {
-  getProjectDetails,
+import {
+  getCraftDetails,
+  getCraftSlugDetails,
 } from "@/app/contentful/getSlugDetails";
 import CaseStudy, { CaseStudyNotFound } from "@/components/CaseStudy";
 
 export async function generateStaticParams(): Promise<any[]> {
-  const projects = await getProjectDetails();
-  return projects || [];
+  const crafts = await getCraftDetails();
+  return crafts || [];
 }
 
-const ProjectDetails = async ({ params }: any) => {
+const CraftDetails = async ({ params }: any) => {
   const { _slug } = await params;
 
   let data: any = null;
   try {
-    data = await getSlugDetails("projectCard", _slug);
+    data = await getCraftSlugDetails(_slug);
   } catch (e) {
     data = null;
   }
@@ -22,10 +23,10 @@ const ProjectDetails = async ({ params }: any) => {
   const fields = data?.content?.fields;
 
   if (!fields) {
-    return <CaseStudyNotFound label="Project" />;
+    return <CaseStudyNotFound label="Craft" />;
   }
 
   return <CaseStudy fields={fields} />;
 };
 
-export default ProjectDetails;
+export default CraftDetails;
