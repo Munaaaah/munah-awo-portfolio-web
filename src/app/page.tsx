@@ -38,7 +38,7 @@ const PillButton = ({
   <Link
     href={href}
     target={external ? "_blank" : undefined}
-    className="bg-[#27272A] border-[0.3px] border-[#FFFFFF4D] rounded-[24px] h-[43px] min-w-[149px] px-[18px] flex items-center justify-center gap-[6px] text-[14.65px] leading-[19.5px] tracking-[-0.29px] font-medium text-white"
+    className="bg-[#27272A] hover:border-[0.001px] border-[rgba(255,255,255,0.1)] rounded-[22px] h-[43px] min-w-[149px] px-[18px] flex items-center justify-center gap-[6px] text-[14.65px] leading-[19.5px] tracking-[-0.29px] font-medium text-white"
   >
     {text}
     <Image
@@ -131,10 +131,10 @@ export default function Home() {
       <main className="text-white font-creatoDisplay bg-[#09090B] px-6 lg:px-0 lg:pl-[242px] pb-20 lg:pb-[140px] lg:max-w-[1440px] lg:mx-auto">
         {/* Hero */}
         <section className="pt-16 lg:pt-[77px]">
-          <p className="text-[24px] leading-8 tracking-[-0.48px] font-medium text-[#AAAAAA]">
+          <p className="text-[18px] leading-8 tracking-[-0.48px] font-medium text-[#AAAAAA]">
             Hello, I’m <span className="text-white">Maimunah</span>
           </p>
-          <p className="mt-[4px] text-[24px] leading-8 tracking-[-0.48px] font-medium text-white lg:w-[663px]">
+          <p className="mt-[4px] text-[18px] leading-8 tracking-[-0.48px] font-medium text-white lg:w-[663px]">
             {introduction}
           </p>
 
