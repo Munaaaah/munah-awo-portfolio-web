@@ -63,11 +63,11 @@ const Header = () => {
   ];
 
   return (
-    <header className="flex justify-between lg:justify-start z-[9999999] items-center lg:items-start w-full bg-[#09090B] text-white p-6 lg:pl-[52px] lg:pr-6 lg:pt-[59px] lg:pb-8 font-creatoDisplay lg:max-w-[1440px] lg:mx-auto relative">
+    <header className="flex justify-between lg:justify-start z-[9999999] items-center lg:items-start w-full bg-[#09090B] text-white p-6 lg:pl-[52px] lg:pr-6 lg:pt-[69px] lg:pb-8 font-creatoDisplay lg:max-w-[1440px] lg:mx-auto relative">
       <Link
         onClick={() => setShowMenu(false)}
         href={"/"}
-        className="flex items-center gap-3 lg:mt-[11px] lg:w-[383px] shrink-0"
+        className="flex items-center gap-3 lg:mt-[8px] lg:w-[383px] shrink-0"
       >
         <div className="w-[47px] hidden lg:block h-[48px] border-[0.5px] border-[#7A46FF] rounded-[8px] overflow-hidden">
           <Image
@@ -79,7 +79,7 @@ const Header = () => {
           />
         </div>
         <div className="font-medium w-fit">
-          <h4 className="lg:text-[24px] lg:leading-8 lg:tracking-[-0.48px] text-nowrap leading-[1.1rem] w-fit sm:text-[1.1rem] text-[1rem]">
+          <h4 className="lg:text-[18px] lg:leading-8 lg:tracking-[-0.36px] text-nowrap leading-[1.1rem] w-fit sm:text-[1.1rem] text-[1rem]">
             {name}
           </h4>
           <p className="text-[#AAAAAA] text-[14px] lg:text-[16px] lg:leading-6 lg:tracking-[-0.32px] w-fit">
@@ -89,12 +89,12 @@ const Header = () => {
       </Link>
 
       <div className="lg:flex items-start hidden lg:ml-[143px]">
-        <div className="flex flex-col gap-[24px] text-nowrap lg:w-[248px] font-medium">
+        <div className="flex flex-col gap-[8px] mt-[4px] text-nowrap lg:w-[248px] font-medium">
           <p className="text-[#AAAAAA] text-[16px] leading-6 tracking-[-0.32px]">
             Discover
           </p>
 
-          <nav className="flex items-center gap-[30px]">
+          <nav className="flex items-center gap-[31px]">
             {navLinks.map((item) => (
               <Link
                 key={item.label}
@@ -107,15 +107,15 @@ const Header = () => {
           </nav>
         </div>
 
-        <div className="flex flex-col gap-[24px] text-nowrap ml-[220px] font-medium">
+        <div className="flex flex-col gap-[16px] text-nowrap ml-[213px] font-medium">
           <p className="text-[#AAAAAA] text-[16px] leading-6 tracking-[-0.32px]">
             Find me on
           </p>
 
-          <div className="flex items-center gap-7">
+          <div className="flex items-center gap-[21px]">
             {social.map((item, index) => (
               <Link target="_blank" href={item.link || ""} key={index}>
-                <Image src={item.logo} alt={item.alt} width={32} height={32} />
+                <Image src={item.logo} alt={item.alt} width={24} height={24} />
               </Link>
             ))}
           </div>
@@ -173,7 +173,7 @@ const Header = () => {
           <div className="flex items-center gap-7">
             {social.map((item, index) => (
               <Link target="_blank" href={item.link || ""} key={index}>
-                <Image src={item.logo} alt={item.alt} width={32} height={32} />
+                <Image src={item.logo} alt={item.alt} width={24} height={24} />
               </Link>
             ))}
           </div>
