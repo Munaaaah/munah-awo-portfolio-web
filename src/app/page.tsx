@@ -22,7 +22,7 @@ const BIO_PARAGRAPHS = [
   "As a designer, I believe that how something feels is just as important as how it functions. I specialize in bringing clarity to technical products while maintaining speed and intentionality.",
 ];
 
-const CRAFTS = Array.from({ length: 6 }, () => ({
+const CRAFTS = Array.from({ length: 3 }, () => ({
   title: "Karia planet :  Brid",
 }));
 
@@ -44,9 +44,9 @@ const PillButton = ({
     <Image
       src={ArrowRight}
       alt=""
-      width={20}
-      height={20}
-      className="-rotate-[35deg] w-[20px] h-[20px]"
+      width={19}
+      height={19}
+      className="-rotate-[35deg] w-[19px] h-[19px]"
     />
   </Link>
 );
@@ -67,15 +67,15 @@ const ProjectCard = ({
   local?: boolean;
 }) => {
   const card = (
-    <div className="rounded-[24px] overflow-hidden w-full lg:w-[322px] lg:min-h-[314px]">
-      <div className="relative h-[184px] mx-[7px] mt-[8px] rounded-[16px] overflow-hidden">
+    <div className="rounded-[24px] overflow-hidden w-full lg:w-[246px] lg:min-h-[247px]">
+      <div className="relative h-[139px] w-[calc(100%-14px)] lg:w-[230px] mx-[7px] mt-[6px] rounded-[16px] overflow-hidden">
         {local ? (
           <Image
             src={imageSrc}
             alt={imageAlt}
             fill
             className="object-cover"
-            sizes="(min-width: 1024px) 304px, 100vw"
+            sizes="(min-width: 1024px) 230px, 100vw"
           />
         ) : (
           <Image
@@ -83,17 +83,17 @@ const ProjectCard = ({
             alt={imageAlt}
             fill
             className="object-cover object-top"
-            sizes="(min-width: 1024px) 304px, 100vw"
+            sizes="(min-width: 1024px) 230px, 100vw"
           />
         )}
         <div className="absolute inset-0 bg-[#00000033] rounded-[16px]" />
       </div>
-      <div className="pl-[15px] pr-[15px] pt-[16px] pb-[10px]">
-        <h3 className="text-[16px] leading-6 tracking-[-0.32px] font-medium text-white">
+      <div className="px-[7px] pt-[24px] pb-[6px]">
+        <h3 className="text-[16px] leading-6 tracking-[-0.32px] font-bold text-white">
           {title}
         </h3>
         {description ? (
-          <p className="mt-[8px] text-[16px] leading-5 tracking-[-0.32px] font-medium text-[#AAAAAA]">
+          <p className="mt-[8px] text-[16px] leading-5 tracking-[-0.32px] font-medium text-[#AAAAAA] lg:w-[232px]">
             {description}
           </p>
         ) : null}
@@ -124,11 +124,14 @@ export default function Home() {
   const callOutBtn2Url = homeData?.callOutBtn2Url;
   const callOutBtn1Url = homeData?.callOutBtn1Url;
   const projectSlider = homeData?.projectSlider;
+  /* `crafts` — add on Contentful as a list of references (same shape as
+     projectSlider). Falls back to placeholders until it exists. */
+  const crafts = Array.isArray(homeData?.crafts) ? homeData.crafts : null;
 
   return (
     <>
       <Header />
-      <main className="text-white font-creatoDisplay bg-[#09090B] px-6 lg:px-0 lg:pl-[242px] pb-20 lg:pb-[140px] lg:max-w-[1440px] lg:mx-auto">
+      <main className="text-white font-creatoDisplay bg-[#09090B] px-6 lg:px-0 lg:pl-[301px] pb-20 lg:pb-[106px] lg:max-w-[1440px] lg:mx-auto">
         {/* Hero */}
         <section className="pt-16 lg:pt-[77px]">
           <p className="text-[18px] leading-8 tracking-[-0.48px] font-medium text-[#AAAAAA]">
@@ -138,30 +141,30 @@ export default function Home() {
             {introduction}
           </p>
 
-          <div className="mt-[26px] flex flex-wrap items-center gap-[12px] lg:gap-0">
+          <div className="mt-[29px] flex flex-wrap items-center gap-[12px] lg:gap-0">
             <PillButton
               href={callOutBtn1Url || "mailto:talk2borlah@gmail.com"}
               text={callOutBtn1Text || "Let’s talk"}
               external={Boolean(callOutBtn1Url)}
             />
-            <span className="hidden lg:block w-[9px]" />
+            <span className="hidden lg:block w-[13px]" />
             <PillButton
               href={callOutBtn2Url || ""}
               text={callOutBtn2Text || "My Resume"}
               external={Boolean(callOutBtn2Url)}
             />
-            <span className="hidden lg:block w-[16px]" />
+            <span className="hidden lg:block w-[14px]" />
             <PillButton href="#projects" text="My Designs" />
           </div>
         </section>
 
         {/* Selected Works */}
-        <section id="projects" className="mt-16 lg:mt-[60px]">
-          <h2 className="text-[24px] leading-8 tracking-[-0.48px] font-medium text-white">
+        <section id="projects" className="mt-16 lg:mt-[53px]">
+          <h2 className="lg:pl-[5px] text-[24px] leading-8 tracking-[-0.48px] font-medium text-white">
             Selected Works
           </h2>
 
-          <div className="mt-[26px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px] lg:w-[1014px]">
+          <div className="mt-[24px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(3,246px)] gap-[24px] lg:gap-x-[27px] lg:gap-y-[41px] lg:w-[792px]">
             {projectSlider?.map(({ fields }: any, index: number) => {
               const bg = parseContentfulContentImage(fields?.backgroundImage);
               return (
@@ -179,30 +182,46 @@ export default function Home() {
         </section>
 
         {/* Crafts */}
-        <section id="crafts" className="mt-16 lg:mt-[60px]">
-          <h2 className="text-[24px] leading-8 tracking-[-0.48px] font-medium text-white">
+        <section id="crafts" className="mt-16 lg:mt-[53px]">
+          <h2 className="lg:pl-[5px] text-[24px] leading-8 tracking-[-0.48px] font-medium text-white">
             Crafts
           </h2>
 
-          <div className="mt-[48px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px] lg:w-[1014px]">
-            {CRAFTS.map((craft, index) => (
-              <ProjectCard
-                key={index}
-                imageSrc={CraftPlaceholder}
-                imageAlt={craft.title}
-                title={craft.title}
-                local
-              />
-            ))}
+          <div className="mt-[23px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(3,246px)] gap-[24px] lg:gap-x-[27px] lg:gap-y-[41px] lg:w-[792px]">
+            {crafts?.length
+              ? crafts.map(({ fields }: any, index: number) => {
+                  const bg = parseContentfulContentImage(
+                    fields?.backgroundImage,
+                  );
+                  return (
+                    <ProjectCard
+                      key={index}
+                      href={`/craft/${fields?.slug}`}
+                      imageSrc={`https:${bg?.src}`}
+                      imageAlt={bg?.alt || fields?.projectName || "craft"}
+                      title={fields?.projectName}
+                      description={fields?.projectType}
+                    />
+                  );
+                })
+              : CRAFTS.map((craft, index) => (
+                  <ProjectCard
+                    key={index}
+                    imageSrc={CraftPlaceholder}
+                    imageAlt={craft.title}
+                    title={craft.title}
+                    local
+                  />
+                ))}
           </div>
         </section>
 
         {/* About */}
         <section
           id="about"
-          className="mt-24 lg:mt-[136px] flex flex-col lg:flex-row gap-10 lg:gap-[75px]"
+          className="mt-24 lg:mt-[106px] flex flex-col lg:flex-row gap-10 lg:gap-[65px]"
         >
-          <div className="lg:w-[527px]">
+          <div className="lg:w-[452px]">
             <h2 className="text-[24px] leading-8 tracking-[-0.48px] font-medium text-[#AAAAAA]">
               You can call me <br />
               <span className="text-white">Munah</span>
@@ -215,7 +234,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="lg:mt-[39px] w-full lg:w-[322px] h-[373px] rounded-[24px] bg-[#3B3B3B] overflow-hidden shrink-0">
+          <div className="lg:mt-[88px] w-full lg:w-[267px] h-[324px] rounded-[24px] bg-[#3B3B3B] overflow-hidden shrink-0">
             <Image
               src={Munah}
               alt="Maimunah Awotundun"

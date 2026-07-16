@@ -23,6 +23,47 @@ export const getProjectDetails = async () => {
   }
 };
 
+export const getCraftDetails = async () => {
+  try {
+    const res = await client.getEntries({
+      content_type: "pageHomepage",
+      include: 3,
+    });
+
+    const paths = res?.items?.[0]?.fields?.crafts
+      ?.map((item) => ({ _slug: item?.fields?.slug }))
+      .filter((p) => p._slug);
+
+    return paths || [];
+  } catch (e) {
+    return [];
+  }
+};
+
+// Resolves a craft entry by slug. Tries a dedicated `craftCard` content type
+// first, then falls back to `projectCard` (so crafts can reuse the same type).
+export async function getCraftSlugDetails(params) {
+  const types = ["craftCard", "projectCard"];
+
+  for (const type of types) {
+    try {
+      const { items } = await client.getEntries({
+        content_type: type,
+        "fields.slug": params,
+        include: 5,
+      });
+
+      if (items.length) {
+        return { content: items[0] };
+      }
+    } catch (e) {
+      // content type may not exist yet — try the next one
+    }
+  }
+
+  return null;
+}
+
 export const getHeader = async () => {
   const res = await client.getEntries({
     content_type: "componentHeader",
