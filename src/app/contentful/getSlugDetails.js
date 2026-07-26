@@ -14,11 +14,11 @@ export const getProjectDetails = async () => {
   // console.log(res?.items[0]?.fields, "res");
 
   if (res?.items) {
-    const paths = res?.items[0]?.fields?.projectSlider?.map((item) => {
-      return {
-        _slug: item?.fields?.slug,
-      };
-    });
+    const paths = res?.items[0]?.fields?.projectSlider
+      ?.map((item) => ({
+        _slug: item?.fields?.slug?.trim(),
+      }))
+      .filter((p) => p?._slug);
     return paths;
   }
 };
@@ -31,7 +31,7 @@ export const getCraftDetails = async () => {
     });
 
     const paths = res?.items?.[0]?.fields?.crafts
-      ?.map((item) => ({ _slug: item?.fields?.slug }))
+      ?.map((item) => ({ _slug: item?.fields?.slug?.trim() }))
       .filter((p) => p._slug);
 
     return paths || [];
@@ -81,27 +81,54 @@ export const getHeader = async () => {
 };
 
 async function getSlugDetails(detail_content_type, params) {
-  // console.log(params, detail_content_type);
+  // Normalize slugs so accidental leading/trailing spaces in Contentful
+  // do not cause false "not found" results.
+  const normalizedParams = typeof params === "string" ? params.trim() : params;
 
   const { items } = await client.getEntries({
     content_type: detail_content_type,
-    "fields.slug": params,
+    "fields.slug": normalizedParams,
     include: 5,
   });
 
-  // console.log(items);
-
-  if (!items.length) {
+  if (items.length) {
     return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
+      content: items[0],
+    };
+  }
+
+  // Fallback: compare normalized slugs in-memory to recover from legacy
+  // entries where the stored slug still has trailing spaces.
+  const fallback = await client.getEntries({
+    content_type: detail_content_type,
+    include: 5,
+    limit: 1000,
+  });
+
+  const normalizedTarget =
+    typeof normalizedParams === "string"
+      ? normalizedParams.toLowerCase()
+      : normalizedParams;
+
+  const matched = fallback.items.find((entry) => {
+    const slug = entry?.fields?.slug;
+    if (typeof slug !== "string" || typeof normalizedTarget !== "string") {
+      return false;
+    }
+    return slug.trim().toLowerCase() === normalizedTarget;
+  });
+
+  if (matched) {
+    return {
+      content: matched,
     };
   }
 
   return {
-    content: items[0],
+    redirect: {
+      destination: "/",
+      permanent: false,
+    },
   };
 }
 
