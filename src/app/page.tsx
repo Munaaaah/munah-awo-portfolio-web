@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import ArrowRight from "../../public/arrow-right.svg";
-import CraftPlaceholder from "../../public/craft-placeholder.png";
 import Munah from "../../public/munah-full.jpg";
 import { parseContentfulContentImage } from "./contentful/contentImage";
 
@@ -21,10 +20,6 @@ const BIO_PARAGRAPHS = [
   "At Navan and various early-stage startups, I've collaborated closely with engineers, PMs, and researchers to ship meaningful products quickly without compromising quality or user experience.",
   "As a designer, I believe that how something feels is just as important as how it functions. I specialize in bringing clarity to technical products while maintaining speed and intentionality.",
 ];
-
-const CRAFTS = Array.from({ length: 3 }, () => ({
-  title: "Karia planet :  Brid",
-}));
 
 const PillButton = ({
   href,
@@ -124,8 +119,7 @@ export default function Home() {
   const callOutBtn2Url = homeData?.callOutBtn2Url;
   const callOutBtn1Url = homeData?.callOutBtn1Url;
   const projectSlider = homeData?.projectSlider;
-  /* `crafts` — add on Contentful as a list of references (same shape as
-     projectSlider). Falls back to placeholders until it exists. */
+  // `crafts` is a list of references from Contentful.
   const crafts = Array.isArray(homeData?.crafts) ? homeData.crafts : null;
 
   return (
@@ -182,39 +176,29 @@ export default function Home() {
         </section>
 
         {/* Crafts */}
-        <section id="crafts" className="mt-16 lg:mt-[53px]">
-          <h2 className="lg:pl-[5px] text-[24px] leading-8 tracking-[-0.48px] font-medium text-white">
-            Crafts
-          </h2>
+        {crafts?.length ? (
+          <section id="crafts" className="mt-16 lg:mt-[53px]">
+            <h2 className="lg:pl-[5px] text-[24px] leading-8 tracking-[-0.48px] font-medium text-white">
+              Crafts
+            </h2>
 
-          <div className="mt-[23px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(3,246px)] gap-[24px] lg:gap-x-[27px] lg:gap-y-[41px] lg:w-[792px]">
-            {crafts?.length
-              ? crafts.map(({ fields }: any, index: number) => {
-                  const bg = parseContentfulContentImage(
-                    fields?.backgroundImage,
-                  );
-                  return (
-                    <ProjectCard
-                      key={index}
-                      href={`/craft/${fields?.slug}`}
-                      imageSrc={`https:${bg?.src}`}
-                      imageAlt={bg?.alt || fields?.projectName || "craft"}
-                      title={fields?.projectName}
-                      description={fields?.projectType}
-                    />
-                  );
-                })
-              : CRAFTS.map((craft, index) => (
+            <div className="mt-[23px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(3,246px)] gap-[24px] lg:gap-x-[27px] lg:gap-y-[41px] lg:w-[792px]">
+              {crafts.map(({ fields }: any, index: number) => {
+                const bg = parseContentfulContentImage(fields?.backgroundImage);
+                return (
                   <ProjectCard
                     key={index}
-                    imageSrc={CraftPlaceholder}
-                    imageAlt={craft.title}
-                    title={craft.title}
-                    local
+                    href={`/craft/${fields?.slug}`}
+                    imageSrc={`https:${bg?.src}`}
+                    imageAlt={bg?.alt || fields?.projectName || "craft"}
+                    title={fields?.projectName}
+                    description={fields?.projectType}
                   />
-                ))}
-          </div>
-        </section>
+                );
+              })}
+            </div>
+          </section>
+        ) : null}
 
         {/* About */}
         <section

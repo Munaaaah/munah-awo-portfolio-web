@@ -16,6 +16,10 @@ const Header = () => {
     "/header",
     "componentHeader",
   );
+  const { data: homeData }: any = getContent(
+    "/homepage-header",
+    "pageHomepage",
+  );
 
   // console.log(data);
 
@@ -29,6 +33,9 @@ const Header = () => {
   const linkedinLink = data?.contents?.fields?.linkedinLink;
   const worksLink = data?.contents?.fields?.worksLink;
   const discover = data?.contents?.fields?.discover;
+  const hasCrafts =
+    Array.isArray(homeData?.contents?.fields?.crafts) &&
+    homeData?.contents?.fields?.crafts?.length > 0;
 
   const social = [
     {
@@ -59,7 +66,7 @@ const Header = () => {
   const navLinks = [
     { label: "About", href: "/#about" },
     { label: "Projects", href: "/#projects" },
-    { label: "Crafts", href: "/#crafts" },
+    ...(hasCrafts ? [{ label: "Crafts", href: "/#crafts" }] : []),
   ];
 
   return (
