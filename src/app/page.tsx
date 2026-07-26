@@ -136,12 +136,12 @@ export default function Home() {
           </p>
 
           <div className="mt-[29px] flex flex-wrap items-center gap-[12px] lg:gap-0">
-            <PillButton
+            {/* <PillButton
               href={callOutBtn1Url || "mailto:talk2borlah@gmail.com"}
               text={callOutBtn1Text || "Let’s talk"}
               external={Boolean(callOutBtn1Url)}
-            />
-            <span className="hidden lg:block w-[13px]" />
+            /> */}
+            {/* <span className="hidden lg:block w-[13px]" /> */}
             <PillButton
               href={callOutBtn2Url || ""}
               text={callOutBtn2Text || "My Resume"}

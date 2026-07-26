@@ -8,6 +8,102 @@ import DisplayComponent from "@/components/DisplayComponent";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+type TocItem = {
+  label: string;
+  href: string;
+};
+
+const normalizeHref = (href?: string): string | null => {
+  if (typeof href !== "string") return null;
+  const trimmed = href.trim();
+  if (!trimmed) return null;
+  return trimmed.startsWith("#") ? trimmed : `#${trimmed}`;
+};
+
+const normalizeTocItems = (raw: any): TocItem[] => {
+  if (!Array.isArray(raw)) return [];
+
+  return raw
+    .map((item): TocItem | null => {
+      const label =
+        item?.label ||
+        item?.title ||
+        item?.fields?.label ||
+        item?.fields?.title;
+      const href =
+        item?.href ||
+        item?.fields?.href ||
+        item?.anchor ||
+        item?.fields?.anchor;
+      const normalizedHref = normalizeHref(href);
+
+      if (typeof label !== "string" || !label.trim() || !normalizedHref) {
+        return null;
+      }
+
+      return {
+        label: label.trim(),
+        href: normalizedHref,
+      };
+    })
+    .filter((item): item is TocItem => Boolean(item));
+};
+
+/* Turn a section title into a stable anchor id, e.g. "The Challenge" -> "the-challenge" */
+const slugifyAnchor = (value?: string): string =>
+  typeof value === "string"
+    ? value
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-")
+    : "";
+
+type CaseStudySection = {
+  id: string;
+  title: string;
+  sidebarLabel: string;
+  body?: string;
+  richText?: any;
+  callout?: string;
+  highlights: string[];
+  blocks?: any[];
+  hideFromSidebar: boolean;
+};
+
+/* Normalize entries from a `caseStudySections` reference list on Contentful.
+   Each entry may define: title, sidebarLabel, anchor, body (long text),
+   richText, callout, highlights (list), blocks (refs to image/richText items),
+   hideFromSidebar. Only title is required. */
+const normalizeCaseStudySections = (raw: any): CaseStudySection[] => {
+  if (!Array.isArray(raw)) return [];
+
+  return raw
+    .map((item): CaseStudySection | null => {
+      const f = item?.fields || item;
+      const title = typeof f?.title === "string" ? f.title.trim() : "";
+      if (!title) return null;
+
+      return {
+        id: slugifyAnchor(f?.anchor) || slugifyAnchor(title),
+        title,
+        sidebarLabel:
+          typeof f?.sidebarLabel === "string" && f.sidebarLabel.trim()
+            ? f.sidebarLabel.trim()
+            : title,
+        body: typeof f?.body === "string" ? f.body : undefined,
+        richText: f?.richText,
+        callout: typeof f?.callout === "string" ? f.callout : undefined,
+        highlights: Array.isArray(f?.highlights)
+          ? f.highlights.filter((h: unknown) => typeof h === "string")
+          : [],
+        blocks: Array.isArray(f?.blocks) ? f.blocks : undefined,
+        hideFromSidebar: Boolean(f?.hideFromSidebar),
+      };
+    })
+    .filter((s): s is CaseStudySection => Boolean(s));
+};
+
 /* Split a Contentful long-text field into paragraphs */
 const toParagraphs = (text?: string): string[] =>
   typeof text === "string"
@@ -152,6 +248,11 @@ const CaseStudy = ({ fields }: { fields: any }) => {
     : [];
   const learnings = fields?.learnings;
 
+  /* Fully dynamic content: ordered list of section entries per project */
+  const dynamicSections = normalizeCaseStudySections(
+    fields?.caseStudySections || fields?.contentSections,
+  );
+
   const cover =
     backgroundImage ||
     (projectWebImage && parseContentfulContentImage(projectWebImage));
@@ -161,7 +262,7 @@ const CaseStudy = ({ fields }: { fields: any }) => {
   );
   const hasSolution = Boolean(solution || sections?.length);
 
-  const tocItems = [
+  const defaultTocItems = [
     { label: "Overview", href: "#overview", show: hasOverview },
     {
       label: "Problem / Solution",
@@ -176,7 +277,21 @@ const CaseStudy = ({ fields }: { fields: any }) => {
       show: Boolean(impact || impactHighlights.length),
     },
     { label: "What i learned", href: "#learnings", show: Boolean(learnings) },
-  ].filter((item) => item.show);
+  ]
+    .filter((item) => item.show)
+    .map(({ label, href }) => ({ label, href }));
+
+  const customTocItems = normalizeTocItems(
+    fields?.sidebarItems || fields?.tocItems,
+  );
+  const dynamicTocItems = dynamicSections
+    .filter((s) => !s.hideFromSidebar)
+    .map((s) => ({ label: s.sidebarLabel, href: `#${s.id}` }));
+  const tocItems = customTocItems.length
+    ? customTocItems
+    : dynamicTocItems.length
+      ? dynamicTocItems
+      : defaultTocItems;
 
   const metaRow1 = [
     { label: "Timeline", value: timeline, width: "lg:w-[170px]" },
@@ -294,86 +409,129 @@ const CaseStudy = ({ fields }: { fields: any }) => {
               </div>
             ) : null}
 
-            {/* Overview */}
-            {hasOverview && (
-              <section className="mt-[88px]">
-                <SectionHeading id="overview">Overview</SectionHeading>
-                <div className="mt-[22px]">
-                  {overview ? (
-                    <Paragraphs text={overview} />
-                  ) : introduction ? (
-                    <div className="text-[16px] leading-6 tracking-[-0.32px] font-medium lg:w-[628px]">
-                      <RichText document={introduction} />
+            {/* Dynamic sections (per-project, ordered on Contentful) */}
+            {dynamicSections.length ? (
+              dynamicSections.map((section, index) => (
+                <section
+                  key={section.id || index}
+                  className={index === 0 ? "mt-[88px]" : "mt-[108px]"}
+                >
+                  <SectionHeading id={section.id}>
+                    {section.title}
+                  </SectionHeading>
+                  {section.body && (
+                    <div className="mt-[22px]">
+                      <Paragraphs text={section.body} />
+                    </div>
+                  )}
+                  {section.richText && (
+                    <div className="mt-[22px] text-[16px] leading-6 tracking-[-0.32px] font-medium lg:w-[628px]">
+                      <RichText document={section.richText} />
+                    </div>
+                  )}
+                  {section.callout && (
+                    <div className="mt-[33px]">
+                      <Callout text={section.callout} />
+                    </div>
+                  )}
+                  {section.highlights.length ? (
+                    <div className="mt-[41px] flex flex-col gap-[30px]">
+                      {section.highlights.map((highlight, i) => (
+                        <Callout key={i} text={highlight} />
+                      ))}
                     </div>
                   ) : null}
-                </div>
-                {problemStatement && (
-                  <div className="mt-[33px]">
-                    <Callout text={problemStatement} />
-                  </div>
+                  {section.blocks?.length ? (
+                    <DisplayComponent sections={section.blocks} />
+                  ) : null}
+                </section>
+              ))
+            ) : (
+              <>
+                {/* Overview */}
+                {hasOverview && (
+                  <section className="mt-[88px]">
+                    <SectionHeading id="overview">Overview</SectionHeading>
+                    <div className="mt-[22px]">
+                      {overview ? (
+                        <Paragraphs text={overview} />
+                      ) : introduction ? (
+                        <div className="text-[16px] leading-6 tracking-[-0.32px] font-medium lg:w-[628px]">
+                          <RichText document={introduction} />
+                        </div>
+                      ) : null}
+                    </div>
+                    {problemStatement && (
+                      <div className="mt-[33px]">
+                        <Callout text={problemStatement} />
+                      </div>
+                    )}
+                    {overviewSummary && (
+                      <div className="mt-[33px] lg:w-[649px]">
+                        <Paragraphs text={overviewSummary} />
+                      </div>
+                    )}
+                  </section>
                 )}
-                {overviewSummary && (
-                  <div className="mt-[33px] lg:w-[649px]">
-                    <Paragraphs text={overviewSummary} />
-                  </div>
-                )}
-              </section>
-            )}
 
-            {/* The Challenge */}
-            {challenge && (
-              <section className="mt-[108px]">
-                <SectionHeading id="challenge">The Challenge</SectionHeading>
-                <div className="mt-[22px]">
-                  <Paragraphs text={challenge} />
-                </div>
-              </section>
-            )}
-
-            {/* Solution */}
-            {hasSolution && (
-              <section className="mt-[108px]">
-                <SectionHeading id="solution">Solution</SectionHeading>
-                {solution && (
-                  <div className="mt-[22px]">
-                    <Paragraphs text={solution} />
-                  </div>
+                {/* The Challenge */}
+                {challenge && (
+                  <section className="mt-[108px]">
+                    <SectionHeading id="challenge">
+                      The Challenge
+                    </SectionHeading>
+                    <div className="mt-[22px]">
+                      <Paragraphs text={challenge} />
+                    </div>
+                  </section>
                 )}
-                {sections?.length ? (
-                  <DisplayComponent sections={sections} />
+
+                {/* Solution */}
+                {hasSolution && (
+                  <section className="mt-[108px]">
+                    <SectionHeading id="solution">Solution</SectionHeading>
+                    {solution && (
+                      <div className="mt-[22px]">
+                        <Paragraphs text={solution} />
+                      </div>
+                    )}
+                    {sections?.length ? (
+                      <DisplayComponent sections={sections} />
+                    ) : null}
+                  </section>
+                )}
+
+                {/* Impact */}
+                {impact || impactHighlights.length ? (
+                  <section className="mt-[108px]">
+                    <SectionHeading id="impact">
+                      Impact (What changed)
+                    </SectionHeading>
+                    {impact && (
+                      <div className="mt-[22px]">
+                        <Paragraphs text={impact} />
+                      </div>
+                    )}
+                    {impactHighlights.length ? (
+                      <div className="mt-[41px] flex flex-col gap-[30px]">
+                        {impactHighlights.map((highlight, index) => (
+                          <Callout key={index} text={highlight} />
+                        ))}
+                      </div>
+                    ) : null}
+                  </section>
                 ) : null}
-              </section>
-            )}
 
-            {/* Impact */}
-            {impact || impactHighlights.length ? (
-              <section className="mt-[108px]">
-                <SectionHeading id="impact">
-                  Impact (What changed)
-                </SectionHeading>
-                {impact && (
-                  <div className="mt-[22px]">
-                    <Paragraphs text={impact} />
-                  </div>
+                {/* Learnings */}
+                {learnings && (
+                  <section className="mt-[120px]">
+                    <SectionHeading id="learnings">Learnings</SectionHeading>
+                    <div className="mt-[22px]">
+                      <Paragraphs text={learnings} />
+                    </div>
+                  </section>
                 )}
-                {impactHighlights.length ? (
-                  <div className="mt-[41px] flex flex-col gap-[30px]">
-                    {impactHighlights.map((highlight, index) => (
-                      <Callout key={index} text={highlight} />
-                    ))}
-                  </div>
-                ) : null}
-              </section>
-            ) : null}
-
-            {/* Learnings */}
-            {learnings && (
-              <section className="mt-[120px]">
-                <SectionHeading id="learnings">Learnings</SectionHeading>
-                <div className="mt-[22px]">
-                  <Paragraphs text={learnings} />
-                </div>
-              </section>
+              </>
             )}
           </div>
         </div>
