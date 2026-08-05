@@ -9,6 +9,7 @@ import Link from "next/link";
 import ArrowRight from "../../public/arrow-right.svg";
 import Munah from "../../public/munah-full.jpg";
 import { parseContentfulContentImage } from "./contentful/contentImage";
+import RichText from "./contentful/RichText";
 
 const FALLBACK_INTRO =
   "A product designer who craft strong visuals  craft and intuitive experience across various industries, ranging from fintech, startups and 0-1 products";
@@ -121,6 +122,10 @@ export default function Home() {
   const projectSlider = homeData?.projectSlider;
   // `crafts` is a list of references from Contentful.
   const crafts = Array.isArray(homeData?.crafts) ? homeData.crafts : null;
+  const aboutTitle = homeData?.aboutTitle || "You can call me";
+  const aboutName = homeData?.aboutName || "Munah";
+  const aboutBio = homeData?.aboutBio; // rich text document
+  const aboutImage = parseContentfulContentImage(homeData?.aboutImage);
 
   return (
     <>
@@ -207,23 +212,37 @@ export default function Home() {
         >
           <div className="lg:w-[452px]">
             <h2 className="text-[24px] leading-8 tracking-[-0.48px] font-medium text-[#AAAAAA]">
-              You can call me <br />
-              <span className="text-white">Munah</span>
+              {aboutTitle} <br />
+              <span className="text-white">{aboutName}</span>
             </h2>
 
             <div className="mt-[24px] text-[16px] leading-6 tracking-[-0.32px] font-medium text-[#AAAAAA]">
-              {BIO_PARAGRAPHS.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
+              {aboutBio ? (
+                <RichText document={aboutBio} />
+              ) : (
+                BIO_PARAGRAPHS.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))
+              )}
             </div>
           </div>
 
           <div className="lg:mt-[88px] w-full lg:w-[267px] h-[324px] rounded-[24px] bg-[#3B3B3B] overflow-hidden shrink-0">
-            <Image
-              src={Munah}
-              alt="Maimunah Awotundun"
-              className="w-full h-full object-cover"
-            />
+            {aboutImage?.src ? (
+              <Image
+                src={`https:${aboutImage.src}`}
+                alt={aboutImage.alt || aboutName}
+                width={aboutImage.width || 267}
+                height={aboutImage.height || 324}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <Image
+                src={Munah}
+                alt="Maimunah Awotundun"
+                className="w-full h-full object-cover"
+              />
+            )}
           </div>
         </section>
       </main>
