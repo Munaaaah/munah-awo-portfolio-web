@@ -18,6 +18,40 @@ function RichText({ document }) {
 
   const options = {
     renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: (node) => {
+        const asset = node?.data?.target?.fields;
+        const file = asset?.file;
+        if (!file?.url) return null;
+        const url = file.url.startsWith("//") ? `https:${file.url}` : file.url;
+        const contentType = file.contentType || "";
+
+        if (contentType.startsWith("video/")) {
+          return (
+            <video
+              src={url}
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              className="w-full my-6 rounded-[24px]"
+            />
+          );
+        }
+
+        if (contentType.startsWith("image/")) {
+          return (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={url}
+              alt={asset?.description || asset?.title || ""}
+              className="w-full my-6 rounded-[24px]"
+            />
+          );
+        }
+
+        return null;
+      },
       [BLOCKS.PARAGRAPH]: (node, children) => (
         <p
           style={{
