@@ -6,6 +6,16 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Custom cursor replaces the native one on mouse devices only */
+@media (pointer: fine) {
+  body,
+  a,
+  button,
+  [role="button"] {
+    cursor: none !important;
+  }
+}
+
 body {
   box-sizing: border-box;
   margin: 0;

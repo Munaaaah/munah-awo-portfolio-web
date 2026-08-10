@@ -9,6 +9,7 @@ import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import PageTransition from "@/components/PageTransition";
+import CustomCursor from "@/components/CustomCursor";
 
 const CreatoDisplay = localFont({
   src: [
@@ -47,6 +48,7 @@ export default function RootLayout({
       <body
         className={`${CreatoDisplay.variable} bg-[#09090B] antialiased overflow-x-hidden`}
       >
+        <CustomCursor />
         <PageTransition>{children}</PageTransition>
       </body>
     </html>
