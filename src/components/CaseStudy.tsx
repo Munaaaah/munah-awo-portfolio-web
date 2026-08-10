@@ -113,15 +113,74 @@ const toParagraphs = (text?: string): string[] =>
         .filter(Boolean)
     : [];
 
+const VIDEO_EXT = /\.(mp4|webm|mov|m4v)(\?.*)?$/i;
+const MD_IMAGE_RE = /!\[([^\]]*)\]\(([^)\s]+)\)/g;
+
+type MediaSegment = { type: "image" | "video"; src: string; alt: string };
+
+const toMedia = (url: string, alt: string): MediaSegment => {
+  const src = url.startsWith("//") ? `https:${url}` : url;
+  return { type: VIDEO_EXT.test(src) ? "video" : "image", src, alt };
+};
+
+/* Split text into text/media segments. Handles `![alt](url)` inserted by
+   Contentful's "Insert media" in long-text fields (inline or standalone)
+   and bare asset URLs on their own line */
+const splitMediaSegments = (text: string): (string | MediaSegment)[] => {
+  const segments: (string | MediaSegment)[] = [];
+  let last = 0;
+  for (const m of text.matchAll(MD_IMAGE_RE)) {
+    const before = text.slice(last, m.index).trim();
+    if (before) segments.push(before);
+    segments.push(toMedia(m[2], m[1].trim()));
+    last = (m.index as number) + m[0].length;
+  }
+  const rest = text.slice(last).trim();
+  if (rest) {
+    if (
+      /^(https?:)?\/\/\S+\.(mp4|webm|mov|m4v|png|jpe?g|gif|webp|avif|svg)(\?\S*)?$/i.test(
+        rest,
+      )
+    ) {
+      segments.push(toMedia(rest, ""));
+    } else {
+      segments.push(rest);
+    }
+  }
+  return segments;
+};
+
+const MediaEmbed = ({ media }: { media: MediaSegment }) =>
+  media.type === "video" ? (
+    <video
+      src={media.src}
+      autoPlay
+      muted
+      loop
+      playsInline
+      controls
+      className="w-full rounded-[24px]"
+    />
+  ) : (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={media.src} alt={media.alt} className="w-full rounded-[24px]" />
+  );
+
 /* Body copy — 16px/24 white, per design */
 const Paragraphs = ({ text }: { text?: string }) => {
   const paragraphs = toParagraphs(text);
   if (!paragraphs.length) return null;
   return (
     <div className="space-y-6 text-[16px] leading-6 tracking-[-0.32px] font-medium text-white lg:w-[628px]">
-      {paragraphs.map((p, i) => (
-        <p key={i}>{p}</p>
-      ))}
+      {paragraphs.flatMap((p, i) =>
+        splitMediaSegments(p).map((segment, j) =>
+          typeof segment === "string" ? (
+            <p key={`${i}-${j}`}>{segment}</p>
+          ) : (
+            <MediaEmbed key={`${i}-${j}`} media={segment} />
+          ),
+        ),
+      )}
     </div>
   );
 };
@@ -129,24 +188,43 @@ const Paragraphs = ({ text }: { text?: string }) => {
 /* Italic callout with the vertical bar, e.g. "The Problem : ..." */
 const Callout = ({ text }: { text?: string }) => {
   if (typeof text !== "string" || !text.trim()) return null;
-  const colonIndex = text.indexOf(":");
+
+  const segments = splitMediaSegments(text.trim());
+  const mediaSegments = segments.filter(
+    (s): s is MediaSegment => typeof s !== "string",
+  );
+  const plainText = segments
+    .filter((s): s is string => typeof s === "string")
+    .join(" ");
+
+  const colonIndex = plainText.indexOf(":");
   const label =
-    colonIndex > 0 && colonIndex < 40 ? text.slice(0, colonIndex) : null;
-  const rest = label ? text.slice(colonIndex + 1) : text;
+    colonIndex > 0 && colonIndex < 40 ? plainText.slice(0, colonIndex) : null;
+  const rest = label ? plainText.slice(colonIndex + 1) : plainText;
+
   return (
-    <div className="relative pl-[25px] lg:w-[645px]">
-      <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-full rounded-[24px] bg-[#AAAAAAAB]" />
-      <p className="italic text-[#AAAAAA] text-[16px] leading-6 tracking-[-0.32px] font-medium">
-        {label ? (
-          <>
-            <span className="font-bold">{label.trim()}</span>
-            {" : "}
-            {rest.trim()}
-          </>
-        ) : (
-          rest.trim()
-        )}
-      </p>
+    <div className="flex flex-col gap-6">
+      {plainText ? (
+        <div className="relative pl-[25px] lg:w-[645px]">
+          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-full rounded-[24px] bg-[#AAAAAAAB]" />
+          <p className="italic text-[#AAAAAA] text-[16px] leading-6 tracking-[-0.32px] font-medium">
+            {label ? (
+              <>
+                <span className="font-bold">{label.trim()}</span>
+                {" : "}
+                {rest.trim()}
+              </>
+            ) : (
+              rest.trim()
+            )}
+          </p>
+        </div>
+      ) : null}
+      {mediaSegments.map((media, i) => (
+        <div key={i} className="lg:w-[628px]">
+          <MediaEmbed media={media} />
+        </div>
+      ))}
     </div>
   );
 };
