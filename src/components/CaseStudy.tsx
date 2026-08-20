@@ -166,18 +166,50 @@ const MediaEmbed = ({ media }: { media: MediaSegment }) =>
     <img src={media.src} alt={media.alt} className="w-full rounded-[24px]" />
   );
 
-/* Body copy — 16px/24 white, per design */
+/* Body copy — Inter 16px/1.6, ~700px measure. Supports `**bold**` inline and
+   fully-bold lines as sub-headings (H3 20px/1.3) */
+const BOLD_RE = /\*\*([^*]+)\*\*/g;
+
+const renderInlineBold = (text: string): React.ReactNode => {
+  const parts = text.split(BOLD_RE);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="font-bold text-white">
+        {part}
+      </strong>
+    ) : (
+      part
+    ),
+  );
+};
+
+const isBoldHeading = (p: string) => /^\*\*[^*]+\*\*$/.test(p.trim());
+
 const Paragraphs = ({ text }: { text?: string }) => {
   const paragraphs = toParagraphs(text);
   if (!paragraphs.length) return null;
   return (
-    <div className="space-y-6 text-[16px] leading-6 tracking-[-0.32px] font-medium text-white lg:w-[628px]">
+    <div className="font-inter text-[16px] leading-[1.6] text-white max-w-[700px]">
       {paragraphs.flatMap((p, i) =>
         splitMediaSegments(p).map((segment, j) =>
           typeof segment === "string" ? (
-            <p key={`${i}-${j}`}>{segment}</p>
+            isBoldHeading(segment) ? (
+              <h3
+                key={`${i}-${j}`}
+                className="text-[20px] leading-[1.3] font-bold text-white mb-[6px] [&:not(:first-child)]:mt-6"
+              >
+                {segment.trim().replace(/^\*\*|\*\*$/g, "")}
+              </h3>
+            ) : (
+              <p key={`${i}-${j}`} className="mb-6 last:mb-0">
+                {renderInlineBold(segment)}
+              </p>
+            )
           ) : (
-            <MediaEmbed key={`${i}-${j}`} media={segment} />
+            <div key={`${i}-${j}`} className="mb-6 last:mb-0">
+              <MediaEmbed media={segment} />
+            </div>
           ),
         ),
       )}
@@ -205,9 +237,9 @@ const Callout = ({ text }: { text?: string }) => {
   return (
     <div className="flex flex-col gap-6">
       {plainText ? (
-        <div className="relative pl-[25px] lg:w-[645px]">
+        <div className="relative pl-[25px] max-w-[700px]">
           <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-full rounded-[24px] bg-[#AAAAAAAB]" />
-          <p className="italic text-[#AAAAAA] text-[16px] leading-6 tracking-[-0.32px] font-medium">
+          <p className="italic text-[#AAAAAA] font-inter text-[16px] leading-[1.6]">
             {label ? (
               <>
                 <span className="font-bold">{label.trim()}</span>
@@ -221,7 +253,7 @@ const Callout = ({ text }: { text?: string }) => {
         </div>
       ) : null}
       {mediaSegments.map((media, i) => (
-        <div key={i} className="lg:w-[628px]">
+        <div key={i} className="max-w-[700px]">
           <MediaEmbed media={media} />
         </div>
       ))}
@@ -229,7 +261,7 @@ const Callout = ({ text }: { text?: string }) => {
   );
 };
 
-/* Section heading — 24px Creato Bold, per design */
+/* Section heading — H2 32px/1.2 per type scale */
 const SectionHeading = ({
   id,
   children,
@@ -239,7 +271,7 @@ const SectionHeading = ({
 }) => (
   <h2
     id={id}
-    className="text-[24px] leading-8 tracking-[-0.48px] font-bold text-white scroll-mt-28"
+    className="text-[28px] lg:text-[32px] leading-[1.2] tracking-[-0.48px] font-bold text-white scroll-mt-28"
   >
     {children}
   </h2>
@@ -422,7 +454,7 @@ const CaseStudy = ({ fields }: { fields: any }) => {
 
           {/* Content column */}
           <div className="lg:ml-[68px] lg:w-[703px] lg:pt-[36px] mt-6 lg:mt-0">
-            <h1 className="text-[24px] leading-8 tracking-[-0.48px] font-bold text-white">
+            <h1 className="text-[32px] lg:text-[48px] leading-[1.1] tracking-[-0.48px] font-bold text-white">
               {caseStudyTitle}
             </h1>
 
@@ -466,7 +498,9 @@ const CaseStudy = ({ fields }: { fields: any }) => {
                   <div className="flex flex-col sm:flex-row gap-6 sm:gap-0">
                     {metaRow1.map((m, i) => (
                       <div key={i} className={`flex flex-col gap-2 ${m.width}`}>
-                        <p className="text-[#AAAAAA]">{m.label}</p>
+                        <p className="text-[#AAAAAA] text-[14px] leading-[1.5]">
+                          {m.label}
+                        </p>
                         <p className="text-white pr-6">{m.value}</p>
                       </div>
                     ))}
@@ -476,7 +510,9 @@ const CaseStudy = ({ fields }: { fields: any }) => {
                   <div className="flex flex-col sm:flex-row gap-6 sm:gap-0">
                     {metaRow2.map((m, i) => (
                       <div key={i} className={`flex flex-col gap-2 ${m.width}`}>
-                        <p className="text-[#AAAAAA]">{m.label}</p>
+                        <p className="text-[#AAAAAA] text-[14px] leading-[1.5]">
+                          {m.label}
+                        </p>
                         <p className="text-white pr-6 lg:max-w-[241px]">
                           {m.value}
                         </p>
@@ -503,7 +539,7 @@ const CaseStudy = ({ fields }: { fields: any }) => {
                     </div>
                   )}
                   {section.richText && (
-                    <div className="mt-[22px] text-[16px] leading-6 tracking-[-0.32px] font-medium lg:w-[628px]">
+                    <div className="mt-[22px] font-inter text-[16px] leading-[1.6] max-w-[700px]">
                       <RichText document={section.richText} />
                     </div>
                   )}
@@ -534,7 +570,7 @@ const CaseStudy = ({ fields }: { fields: any }) => {
                       {overview ? (
                         <Paragraphs text={overview} />
                       ) : introduction ? (
-                        <div className="text-[16px] leading-6 tracking-[-0.32px] font-medium lg:w-[628px]">
+                        <div className="font-inter text-[16px] leading-[1.6] max-w-[700px]">
                           <RichText document={introduction} />
                         </div>
                       ) : null}

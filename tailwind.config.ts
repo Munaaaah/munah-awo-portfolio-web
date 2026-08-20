@@ -10,6 +10,7 @@ export default {
     extend: {
       fontFamily: {
         creatoDisplay: ["var(--font-CreatoDisplay)"],
+        inter: ["var(--font-inter)"],
       },
     },
   },

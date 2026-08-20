@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import "swiper/css";
@@ -33,6 +34,11 @@ const CreatoDisplay = localFont({
   variable: "--font-CreatoDisplay",
 });
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
 export const metadata: Metadata = {
   title: "Maimunah Awotundun - Product Designer",
   description: "User Experience and Interface Designer",
@@ -46,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${CreatoDisplay.variable} bg-[#09090B] antialiased overflow-x-hidden`}
+        className={`${CreatoDisplay.variable} ${inter.variable} bg-[#09090B] antialiased overflow-x-hidden`}
       >
         <CustomCursor />
         <PageTransition>{children}</PageTransition>
