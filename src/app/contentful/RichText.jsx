@@ -56,8 +56,8 @@ function RichText({ document }) {
         <p
           style={{
             fontSize: "16px",
-            lineHeight: "30px",
-            marginBottom: "0.75rem",
+            lineHeight: "1.6",
+            marginBottom: "1.5rem",
           }}
         >
           {children}
@@ -66,8 +66,8 @@ function RichText({ document }) {
       [BLOCKS.HEADING_2]: (node, children) => (
         <h2
           style={{
-            fontSize: "24px",
-            lineHeight: "30px",
+            fontSize: "32px",
+            lineHeight: "1.2",
             marginBottom: "0.75rem",
             fontWeight: "700",
           }}
@@ -79,8 +79,8 @@ function RichText({ document }) {
         <h3
           style={{
             fontSize: "20px",
-            lineHeight: "30px",
-            marginBottom: "0.75rem",
+            lineHeight: "1.3",
+            marginBottom: "0.5rem",
             fontWeight: "700",
           }}
         >
@@ -91,8 +91,8 @@ function RichText({ document }) {
       [BLOCKS.HEADING_1]: (node, children) => (
         <h1
           style={{
-            fontSize: "32px",
-            lineHeight: "30px",
+            fontSize: "48px",
+            lineHeight: "1.1",
             marginBottom: "0.75rem",
             fontWeight: "700",
           }}
@@ -102,7 +102,7 @@ function RichText({ document }) {
       ),
 
       [BLOCKS.LIST_ITEM]: (node, children) => (
-        <li className="text-[15px] leading-[30px]">{children}</li>
+        <li className="text-[16px] leading-[1.6]">{children}</li>
       ),
       [BLOCKS.UL_LIST]: (node, children) => (
         <ul className="list-disc ml-6 space-y-2">{children}</ul>
