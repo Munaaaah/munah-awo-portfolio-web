@@ -159,11 +159,11 @@ const MediaEmbed = ({ media }: { media: MediaSegment }) =>
       loop
       playsInline
       controls
-      className="w-full rounded-[24px]"
+      className="w-full "
     />
   ) : (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={media.src} alt={media.alt} className="w-full rounded-[24px]" />
+    <img src={media.src} alt={media.alt} className="w-full " />
   );
 
 /* Body copy — Inter 16px/1.6, ~700px measure. Supports `**bold**` inline and
@@ -190,14 +190,14 @@ const Paragraphs = ({ text }: { text?: string }) => {
   const paragraphs = toParagraphs(text);
   if (!paragraphs.length) return null;
   return (
-    <div className="font-inter text-[16px] leading-[1.6] text-white max-w-[700px]">
+    <div className="text-[16px] leading-[24px] tracking-[-0.32px] text-[#AAAAAA] max-w-[703px]">
       {paragraphs.flatMap((p, i) =>
         splitMediaSegments(p).map((segment, j) =>
           typeof segment === "string" ? (
             isBoldHeading(segment) ? (
               <h3
                 key={`${i}-${j}`}
-                className="text-[20px] leading-[1.3] font-bold text-white mb-[6px] [&:not(:first-child)]:mt-6"
+                className="text-[18px] leading-[24px] tracking-[-0.36px] font-bold text-white mb-[6px] [&:not(:first-child)]:mt-6"
               >
                 {segment.trim().replace(/^\*\*|\*\*$/g, "")}
               </h3>
@@ -237,9 +237,9 @@ const Callout = ({ text }: { text?: string }) => {
   return (
     <div className="flex flex-col gap-6">
       {plainText ? (
-        <div className="relative pl-[25px] max-w-[700px]">
+        <div className="relative pl-[25px] max-w-[568px]">
           <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-full rounded-[24px] bg-[#AAAAAAAB]" />
-          <p className="italic text-[#AAAAAA] font-inter text-[16px] leading-[1.6]">
+          <p className="italic font-bold text-[#AAAAAA] text-[16px] leading-[24px] tracking-[-0.32px]">
             {label ? (
               <>
                 <span className="font-bold">{label.trim()}</span>
@@ -253,7 +253,7 @@ const Callout = ({ text }: { text?: string }) => {
         </div>
       ) : null}
       {mediaSegments.map((media, i) => (
-        <div key={i} className="max-w-[700px]">
+        <div key={i} className="max-w-[703px]">
           <MediaEmbed media={media} />
         </div>
       ))}
@@ -271,7 +271,7 @@ const SectionHeading = ({
 }) => (
   <h2
     id={id}
-    className="text-[28px] lg:text-[32px] leading-[1.2] tracking-[-0.48px] font-bold text-white scroll-mt-28"
+    className="text-[28px] leading-[32px] tracking-[-0.56px] font-bold text-white scroll-mt-28"
   >
     {children}
   </h2>
@@ -281,7 +281,7 @@ const PillButton = ({ href, text }: { href: string; text: string }) => (
   <Link
     href={href}
     target="_blank"
-    className="bg-[#27272A] border-[0.3px] border-[#FFFFFF4D] rounded-[24px] h-[43px] min-w-[149px] w-fit px-[18px] flex items-center justify-center gap-[6px] text-[14.65px] leading-[19.5px] tracking-[-0.29px] font-medium text-white"
+    className="flex items-center gap-[8px] w-fit text-[18px] leading-[19.54px] tracking-[-0.36px] font-bold text-white underline decoration-solid underline-offset-2"
   >
     {text}
     <Image
@@ -302,7 +302,7 @@ export const CaseStudyNotFound = ({
 }) => (
   <>
     <Header />
-    <main className="text-white font-creatoDisplay bg-[#09090B] min-h-[60vh] flex flex-col items-center justify-center gap-6 p-6">
+    <main className="text-white font-aspekta bg-[#09090B] min-h-[60vh] flex flex-col items-center justify-center gap-6 p-6">
       <h1 className="text-[24px] leading-8 tracking-[-0.48px] font-bold">
         {label} not found
       </h1>
@@ -417,13 +417,13 @@ const CaseStudy = ({ fields }: { fields: any }) => {
   return (
     <>
       <Header />
-      <main className="text-white font-creatoDisplay bg-[#09090B] lg:max-w-[1440px] lg:mx-auto pb-20 lg:pb-[140px]">
-        <div className="flex flex-col lg:flex-row p-6 lg:p-0 lg:pt-[72px] lg:pl-[111px]">
+      <main className="text-white font-aspekta bg-[#09090B] lg:max-w-[1440px] lg:mx-auto pb-20 lg:pb-[98px]">
+        <div className="flex flex-col lg:flex-row p-6 lg:p-0 lg:pt-[30px] lg:pl-[111px]">
           {/* Sidebar */}
           <aside className="lg:w-[326px] shrink-0 lg:sticky lg:top-10 self-start">
             <Link
               href="/"
-              className="flex items-center gap-[12px] py-[12px] lg:p-[14.65px] w-fit text-[#AAAAAA] text-[14.65px] leading-[19.5px] tracking-[-0.29px] font-medium"
+              className="flex items-center gap-[12px] py-[12px] lg:p-[14.65px] w-fit text-[#AAAAAA] text-[14.65px] leading-[19.54px] tracking-[-0.29px] font-normal"
             >
               <Image
                 src={ArrowRight}
@@ -438,12 +438,12 @@ const CaseStudy = ({ fields }: { fields: any }) => {
             <div className="hidden lg:block bg-[#FFFFFF33] h-[1px] w-full mt-[25px]"></div>
 
             {tocItems.length ? (
-              <nav className="hidden lg:flex flex-col gap-[24px] mt-[41px] pl-[5px]">
+              <nav className="hidden lg:flex flex-col gap-[24px] mt-[40px] pl-[5px]">
                 {tocItems.map((item, index) => (
                   <a
                     key={index}
                     href={item.href}
-                    className="text-[#AAAAAA] hover:text-white transition-colors text-[16px] leading-6 tracking-[-0.32px] font-medium"
+                    className="text-[#AAAAAA] hover:text-white transition-colors text-[16px] leading-6 tracking-[-0.32px] font-normal"
                   >
                     {item.label}
                   </a>
@@ -453,13 +453,13 @@ const CaseStudy = ({ fields }: { fields: any }) => {
           </aside>
 
           {/* Content column */}
-          <div className="lg:ml-[68px] lg:w-[703px] lg:pt-[36px] mt-6 lg:mt-0">
-            <h1 className="text-[32px] lg:text-[48px] leading-[1.1] tracking-[-0.48px] font-bold text-white">
+          <div className="lg:ml-[46px] lg:w-[822px] lg:bg-[#131315] lg:rounded-[8px] lg:px-[48px] lg:pt-[48px] lg:pb-[176px] mt-6 lg:mt-[108px]">
+            <h1 className="text-[28px] leading-[36px] tracking-[-0.56px] font-bold text-white max-w-[488px]">
               {caseStudyTitle}
             </h1>
 
             {(liveWebsiteUrl || figmaPrototypeLink) && (
-              <div className="mt-[26px] flex flex-wrap items-center gap-3">
+              <div className="mt-[32px] flex flex-wrap items-center gap-6">
                 {liveWebsiteUrl && (
                   <PillButton href={liveWebsiteUrl} text="View Live App" />
                 )}
@@ -471,13 +471,13 @@ const CaseStudy = ({ fields }: { fields: any }) => {
 
             {/* Cover */}
             {cover?.src ? (
-              <div className="mt-[32px] relative w-full lg:w-[610px] h-[220px] lg:h-[351px] rounded-[24px] overflow-hidden">
+              <div className="mt-[29px] relative w-full lg:w-[744px] lg:-ml-[5px] h-[220px] lg:h-[447px] overflow-hidden">
                 <Image
                   src={`https:${cover.src}`}
                   alt={cover.alt || caseStudyTitle}
                   fill
                   className="object-cover"
-                  sizes="(min-width: 1024px) 610px, 100vw"
+                  sizes="(min-width: 1024px) 744px, 100vw"
                 />
               </div>
             ) : videoLink ? (
@@ -487,18 +487,18 @@ const CaseStudy = ({ fields }: { fields: any }) => {
                 muted
                 playsInline
                 loop
-                className="mt-[32px] w-full lg:w-[610px] h-[220px] lg:h-[351px] rounded-[24px] object-cover"
+                className="mt-[29px] w-full lg:w-[744px] lg:-ml-[5px] h-[220px] lg:h-[447px] object-cover"
               />
             ) : null}
 
             {/* Meta */}
             {metaRow1.length || metaRow2.length ? (
-              <div className="mt-[84px] flex flex-col gap-[35px] text-[16px] leading-6 tracking-[-0.32px] font-medium">
+              <div className="mt-[77px] flex flex-col gap-[35px] text-[16px] leading-6 tracking-[-0.32px] font-medium">
                 {metaRow1.length ? (
                   <div className="flex flex-col sm:flex-row gap-6 sm:gap-0">
                     {metaRow1.map((m, i) => (
                       <div key={i} className={`flex flex-col gap-2 ${m.width}`}>
-                        <p className="text-[#AAAAAA] text-[14px] leading-[1.5]">
+                        <p className="text-[#AAAAAA] text-[14px] leading-6 tracking-[-0.28px] font-normal uppercase">
                           {m.label}
                         </p>
                         <p className="text-white pr-6">{m.value}</p>
@@ -510,7 +510,7 @@ const CaseStudy = ({ fields }: { fields: any }) => {
                   <div className="flex flex-col sm:flex-row gap-6 sm:gap-0">
                     {metaRow2.map((m, i) => (
                       <div key={i} className={`flex flex-col gap-2 ${m.width}`}>
-                        <p className="text-[#AAAAAA] text-[14px] leading-[1.5]">
+                        <p className="text-[#AAAAAA] text-[14px] leading-6 tracking-[-0.28px] font-normal uppercase">
                           {m.label}
                         </p>
                         <p className="text-white pr-6 lg:max-w-[241px]">
@@ -528,23 +528,27 @@ const CaseStudy = ({ fields }: { fields: any }) => {
               dynamicSections.map((section, index) => (
                 <section
                   key={section.id || index}
-                  className={index === 0 ? "mt-[88px]" : "mt-[108px]"}
+                  className={
+                    index === 0
+                      ? "mt-[48px] border-t border-[#2A2A2C] pt-[98px]"
+                      : "mt-[56px] border-t border-[#2A2A2C] pt-[80px]"
+                  }
                 >
                   <SectionHeading id={section.id}>
                     {section.title}
                   </SectionHeading>
                   {section.body && (
-                    <div className="mt-[22px]">
+                    <div className="mt-[32px]">
                       <Paragraphs text={section.body} />
                     </div>
                   )}
                   {section.richText && (
-                    <div className="mt-[22px] font-inter text-[16px] leading-[1.6] max-w-[700px]">
+                    <div className="mt-[32px] text-[16px] leading-[24px] tracking-[-0.32px] text-[#AAAAAA] max-w-[703px]">
                       <RichText document={section.richText} />
                     </div>
                   )}
                   {section.callout && (
-                    <div className="mt-[33px]">
+                    <div className="mt-[55px]">
                       <Callout text={section.callout} />
                     </div>
                   )}
@@ -564,24 +568,24 @@ const CaseStudy = ({ fields }: { fields: any }) => {
               <>
                 {/* Overview */}
                 {hasOverview && (
-                  <section className="mt-[88px]">
+                  <section className="mt-[48px] border-t border-[#2A2A2C] pt-[98px]">
                     <SectionHeading id="overview">Overview</SectionHeading>
-                    <div className="mt-[22px]">
+                    <div className="mt-[32px]">
                       {overview ? (
                         <Paragraphs text={overview} />
                       ) : introduction ? (
-                        <div className="font-inter text-[16px] leading-[1.6] max-w-[700px]">
+                        <div className="text-[16px] leading-[24px] tracking-[-0.32px] text-[#AAAAAA] max-w-[703px]">
                           <RichText document={introduction} />
                         </div>
                       ) : null}
                     </div>
                     {problemStatement && (
-                      <div className="mt-[33px]">
+                      <div className="mt-[55px]">
                         <Callout text={problemStatement} />
                       </div>
                     )}
                     {overviewSummary && (
-                      <div className="mt-[33px] lg:w-[649px]">
+                      <div className="mt-[55px] lg:w-[689px]">
                         <Paragraphs text={overviewSummary} />
                       </div>
                     )}
@@ -590,11 +594,11 @@ const CaseStudy = ({ fields }: { fields: any }) => {
 
                 {/* The Challenge */}
                 {challenge && (
-                  <section className="mt-[108px]">
+                  <section className="mt-[56px] border-t border-[#2A2A2C] pt-[80px]">
                     <SectionHeading id="challenge">
                       The Challenge
                     </SectionHeading>
-                    <div className="mt-[22px]">
+                    <div className="mt-[32px]">
                       <Paragraphs text={challenge} />
                     </div>
                   </section>
@@ -602,10 +606,10 @@ const CaseStudy = ({ fields }: { fields: any }) => {
 
                 {/* Solution */}
                 {hasSolution && (
-                  <section className="mt-[108px]">
+                  <section className="mt-[56px] border-t border-[#2A2A2C] pt-[80px]">
                     <SectionHeading id="solution">Solution</SectionHeading>
                     {solution && (
-                      <div className="mt-[22px]">
+                      <div className="mt-[32px]">
                         <Paragraphs text={solution} />
                       </div>
                     )}
@@ -617,12 +621,12 @@ const CaseStudy = ({ fields }: { fields: any }) => {
 
                 {/* Impact */}
                 {impact || impactHighlights.length ? (
-                  <section className="mt-[108px]">
+                  <section className="mt-[56px] border-t border-[#2A2A2C] pt-[80px]">
                     <SectionHeading id="impact">
                       Impact (What changed)
                     </SectionHeading>
                     {impact && (
-                      <div className="mt-[22px]">
+                      <div className="mt-[32px]">
                         <Paragraphs text={impact} />
                       </div>
                     )}
@@ -638,9 +642,9 @@ const CaseStudy = ({ fields }: { fields: any }) => {
 
                 {/* Learnings */}
                 {learnings && (
-                  <section className="mt-[120px]">
+                  <section className="mt-[56px] border-t border-[#2A2A2C] pt-[80px]">
                     <SectionHeading id="learnings">Learnings</SectionHeading>
-                    <div className="mt-[22px]">
+                    <div className="mt-[32px]">
                       <Paragraphs text={learnings} />
                     </div>
                   </section>
