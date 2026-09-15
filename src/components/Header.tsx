@@ -58,7 +58,11 @@ const Header = () => {
       link: linkedinLink,
       alt: "LinkedIn",
     },
-  ];
+  ].filter((item) =>
+    typeof item.link === "string"
+      ? item.link.trim().length > 0
+      : Boolean(item.link),
+  );
 
   const [showMenu, setShowMenu] = React.useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
