@@ -42,7 +42,7 @@ export default function Project() {
   return (
     <>
       <Header />
-      <main className="text-white font-creatoDisplay  bg-[#09090B]">
+      <main className="text-white font-aspekta  bg-[#09090B]">
         <section className="p-6 lg:px-12 flex flex-col lg:flex-row lg:gap-4 gap-5">
           <div className="w-full">
             <div className="pt-10 border-t border-r border-l-0 border-b-0 w-full border-[#FFFFFF33] h-[21px] rounded-lg"></div>
@@ -53,7 +53,7 @@ export default function Project() {
         </section>
 
         <section
-          className="text-white p-6 lg:px-12 lg:py-20 mt-6 py-14 font-creatoDisplay 
+          className="text-white p-6 lg:px-12 lg:py-20 mt-6 py-14 font-aspekta 
 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 
 gap-6 md:gap-8 lg:gap-10"
         >

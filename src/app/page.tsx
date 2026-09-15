@@ -130,7 +130,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="text-white font-creatoDisplay bg-[#09090B] px-6 lg:px-0 lg:pl-[301px] pb-20 lg:pb-[106px] lg:max-w-[1440px] lg:mx-auto">
+      <main className="text-white font-aspekta bg-[#09090B] px-6 lg:px-0 lg:pl-[301px] pb-20 lg:pb-[106px] lg:max-w-[1440px] lg:mx-auto">
         {/* Hero */}
         <section className="pt-16 lg:pt-[77px]">
           <p className="text-[18px] leading-8 tracking-[-0.48px] font-medium text-[#AAAAAA]">

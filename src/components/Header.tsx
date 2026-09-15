@@ -70,7 +70,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="flex justify-between lg:justify-start z-[9999999] items-center lg:items-start w-full bg-[#09090B] text-white p-6 lg:pl-[52px] lg:pr-6 lg:pt-[69px] lg:pb-8 font-creatoDisplay lg:max-w-[1440px] lg:mx-auto relative">
+    <header className="flex justify-between lg:justify-start z-[9999999] items-center lg:items-start w-full bg-[#09090B] text-white p-6 lg:pl-[52px] lg:pr-6 lg:pt-[69px] lg:pb-8 font-aspekta lg:max-w-[1440px] lg:mx-auto relative">
       <Link
         onClick={() => setShowMenu(false)}
         href={"/"}
@@ -96,7 +96,7 @@ const Header = () => {
       </Link>
 
       <div className="lg:flex items-start hidden lg:ml-[143px]">
-        <div className="flex flex-col gap-[8px] mt-[4px] text-nowrap lg:w-[248px] font-medium">
+        <div className="flex flex-col gap-[24px] mt-[4px] text-nowrap lg:w-[248px] font-medium">
           <p className="text-[#AAAAAA] text-[16px] leading-6 tracking-[-0.32px]">
             Discover
           </p>
@@ -114,15 +114,21 @@ const Header = () => {
           </nav>
         </div>
 
-        <div className="flex flex-col gap-[16px] text-nowrap ml-[213px] font-medium">
+        <div className="flex flex-col gap-[24px] text-nowrap ml-[213px] font-medium">
           <p className="text-[#AAAAAA] text-[16px] leading-6 tracking-[-0.32px]">
             Find me on
           </p>
 
-          <div className="flex items-center gap-[21px]">
+          <div className="flex items-center gap-[28px]">
             {social.map((item, index) => (
               <Link target="_blank" href={item.link || ""} key={index}>
-                <Image src={item.logo} alt={item.alt} width={24} height={24} />
+                <Image
+                  src={item.logo}
+                  alt={item.alt}
+                  width={32}
+                  height={32}
+                  className="w-[32px] h-[32px]"
+                />
               </Link>
             ))}
           </div>

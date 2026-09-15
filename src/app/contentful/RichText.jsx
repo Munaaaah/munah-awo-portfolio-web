@@ -34,7 +34,7 @@ function RichText({ document }) {
               loop
               playsInline
               controls
-              className="w-full my-6 rounded-[24px]"
+              className="w-full my-6 "
             />
           );
         }
@@ -45,7 +45,7 @@ function RichText({ document }) {
             <img
               src={url}
               alt={asset?.description || asset?.title || ""}
-              className="w-full my-6 rounded-[24px]"
+              className="w-full my-6"
             />
           );
         }

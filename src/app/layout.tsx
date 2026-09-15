@@ -12,26 +12,31 @@ import "swiper/css/free-mode";
 import PageTransition from "@/components/PageTransition";
 import CustomCursor from "@/components/CustomCursor";
 
-const CreatoDisplay = localFont({
+const Aspekta = localFont({
   src: [
     {
-      path: "../../public/fonts/CreatoDisplay-Regular.otf",
+      path: "../../public/fonts/Aspekta-400.otf",
       weight: "400",
     },
     {
-      path: "../../public/fonts/CreatoDisplay-Medium.otf",
+      path: "../../public/fonts/Aspekta-500.otf",
       weight: "500",
     },
     {
-      path: "../../public/fonts/CreatoDisplay-Bold.otf",
+      path: "../../public/fonts/Aspekta-700.otf",
       weight: "700",
     },
     {
-      path: "../../public/fonts/CreatoDisplay-Black.otf",
+      path: "../../public/fonts/Aspekta-700.otf",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "../../public/fonts/Aspekta-900.otf",
       weight: "900",
     },
   ],
-  variable: "--font-CreatoDisplay",
+  variable: "--font-Aspekta",
 });
 
 const inter = Inter({
@@ -52,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${CreatoDisplay.variable} ${inter.variable} bg-[#09090B] antialiased overflow-x-hidden`}
+        className={`${Aspekta.variable} ${inter.variable} bg-[#09090B] antialiased overflow-x-hidden`}
       >
         <CustomCursor />
         <PageTransition>{children}</PageTransition>

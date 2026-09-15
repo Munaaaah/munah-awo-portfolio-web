@@ -120,7 +120,7 @@ const CustomCursor = ({ label = "Munah" }: { label?: string }) => {
         <motion.span
           animate={{ scale: hovering ? 1.08 : 1 }}
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
-          className="block rounded-full px-[12px] py-[5px] text-[12px] leading-[16px] font-bold font-creatoDisplay whitespace-nowrap"
+          className="block rounded-full px-[12px] py-[5px] text-[12px] leading-[16px] font-bold font-aspekta whitespace-nowrap"
           style={{
             backgroundColor: hovering ? "white" : PRIMARY,
             color: hovering ? PRIMARY : "white",
