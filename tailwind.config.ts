@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        creatoDisplay: ["var(--font-CreatoDisplay)"],
+        aspekta: ["var(--font-Aspekta)"],
         inter: ["var(--font-inter)"],
       },
     },

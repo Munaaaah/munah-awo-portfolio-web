@@ -50,7 +50,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#09090B] text-white font-creatoDisplay">
+    <footer className="bg-[#09090B] text-white font-aspekta">
       <div className="p-6 py-14 lg:p-0 lg:h-[392px] lg:max-w-[1440px] lg:mx-auto">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-0 lg:pl-[50px]">
           <h4 className="font-medium text-[24px] lg:text-[32px] leading-8 tracking-[-0.64px] lg:w-[420px] lg:pt-[123px]">
