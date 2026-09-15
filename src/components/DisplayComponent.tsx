@@ -25,7 +25,7 @@ const DisplayComponent = ({ sections }: { sections: any }) => {
 
         if (videoSrc) {
           return (
-            <div className="w-full lg:w-[610px] my-6 lg:my-[57px]" key={index}>
+            <div className="w-full lg:w-[610px] my-8 lg:my-[64px]" key={index}>
               <video
                 src={videoSrc}
                 autoPlay
@@ -40,7 +40,7 @@ const DisplayComponent = ({ sections }: { sections: any }) => {
         }
 
         return fields.image ? (
-          <div className="w-full lg:w-[610px] my-6 lg:my-[57px]" key={index}>
+          <div className="w-full lg:w-[610px] my-8 lg:my-[64px]" key={index}>
             <Image
               src={`https:${parseContentfulContentImage(fields?.image)?.src}`}
               width={parseContentfulContentImage(fields?.image)?.width}
@@ -51,7 +51,7 @@ const DisplayComponent = ({ sections }: { sections: any }) => {
           </div>
         ) : (
           <div
-            className="w-full lg:w-[628px] my-6 lg:my-[57px] text-[16px] leading-6 tracking-[-0.32px] font-medium"
+            className="w-full lg:w-[628px] my-8 lg:my-[64px] text-[16px] leading-6 tracking-[-0.32px] font-medium"
             key={index}
           >
             <RichText document={fields?.richText} />

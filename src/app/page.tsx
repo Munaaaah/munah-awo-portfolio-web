@@ -34,7 +34,7 @@ const PillButton = ({
   <Link
     href={href}
     target={external ? "_blank" : undefined}
-    className="bg-[#27272A] hover:border-[0.001px] border-[rgba(255,255,255,0.1)] rounded-[22px] h-[43px] min-w-[149px] px-[18px] flex items-center justify-center gap-[6px] text-[14.65px] leading-[19.5px] tracking-[-0.29px] font-medium text-white"
+    className="group bg-[#27272A] hover:border-[0.001px] border-[rgba(255,255,255,0.1)] rounded-[22px] h-[43px] min-w-[149px] px-[18px] flex items-center justify-center text-[14.65px] leading-[19.5px] tracking-[-0.29px] font-medium text-white"
   >
     {text}
     <Image
@@ -42,7 +42,7 @@ const PillButton = ({
       alt=""
       width={19}
       height={19}
-      className="-rotate-[35deg] w-[19px] h-[19px]"
+      className="-rotate-[35deg] w-[19px] h-[19px] ml-0 opacity-0 -translate-x-1 transition-all duration-200 group-hover:ml-[6px] group-hover:opacity-100 group-hover:translate-x-0"
     />
   </Link>
 );
@@ -141,19 +141,26 @@ export default function Home() {
           </p>
 
           <div className="mt-[29px] flex flex-wrap items-center gap-[12px] lg:gap-0">
-            {/* <PillButton
-              href={callOutBtn1Url || "mailto:talk2borlah@gmail.com"}
-              text={callOutBtn1Text || "Let’s talk"}
-              external={Boolean(callOutBtn1Url)}
-            /> */}
-            {/* <span className="hidden lg:block w-[13px]" /> */}
-            <PillButton
-              href={callOutBtn2Url || ""}
-              text={callOutBtn2Text || "My Resume"}
-              external={Boolean(callOutBtn2Url)}
-            />
-            <span className="hidden lg:block w-[14px]" />
-            <PillButton href="#projects" text="My Designs" />
+            {callOutBtn1Url && callOutBtn1Text ? (
+              <>
+                <PillButton
+                  href={callOutBtn1Url}
+                  text={callOutBtn1Text}
+                  external={Boolean(callOutBtn1Url)}
+                />
+                <span className="hidden lg:block w-[13px]" />
+              </>
+            ) : null}
+            {callOutBtn2Url && callOutBtn2Text ? (
+              <>
+                <PillButton
+                  href={callOutBtn2Url}
+                  text={callOutBtn2Text}
+                  external={Boolean(callOutBtn2Url)}
+                />
+                <span className="hidden lg:block w-[14px]" />
+              </>
+            ) : null}
           </div>
         </section>
 

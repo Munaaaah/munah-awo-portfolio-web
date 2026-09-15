@@ -70,6 +70,7 @@ function RichText({ document }) {
             lineHeight: "1.2",
             marginBottom: "0.75rem",
             fontWeight: "700",
+            color: "#FFFFFF",
           }}
         >
           {children}
@@ -82,6 +83,7 @@ function RichText({ document }) {
             lineHeight: "1.3",
             marginBottom: "0.5rem",
             fontWeight: "700",
+            color: "#FFFFFF",
           }}
         >
           {children}
@@ -95,6 +97,7 @@ function RichText({ document }) {
             lineHeight: "1.1",
             marginBottom: "0.75rem",
             fontWeight: "700",
+            color: "#FFFFFF",
           }}
         >
           {children}
@@ -107,6 +110,7 @@ function RichText({ document }) {
       [BLOCKS.UL_LIST]: (node, children) => (
         <ul className="list-disc ml-6 space-y-2">{children}</ul>
       ),
+      [BLOCKS.HR]: () => null,
       [INLINES.HYPERLINK]: (node, children) => {
         return (
           <a href={node.data.uri} target="_blank" rel="noopener noreferrer">

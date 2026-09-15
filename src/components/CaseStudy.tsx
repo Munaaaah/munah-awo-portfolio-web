@@ -207,7 +207,7 @@ const Paragraphs = ({ text }: { text?: string }) => {
               </p>
             )
           ) : (
-            <div key={`${i}-${j}`} className="mb-6 last:mb-0">
+            <div key={`${i}-${j}`} className="pt-2 mb-8 last:mb-0">
               <MediaEmbed media={segment} />
             </div>
           ),
@@ -363,6 +363,15 @@ const CaseStudy = ({ fields }: { fields: any }) => {
     fields?.caseStudySections || fields?.contentSections,
   );
 
+  const visibleDynamicSections = dynamicSections.filter(
+    (section) =>
+      Boolean(section.body) ||
+      Boolean(section.richText) ||
+      Boolean(section.callout) ||
+      Boolean(section.highlights.length) ||
+      Boolean(section.blocks?.length),
+  );
+
   const cover =
     backgroundImage ||
     (projectWebImage && parseContentfulContentImage(projectWebImage));
@@ -394,7 +403,7 @@ const CaseStudy = ({ fields }: { fields: any }) => {
   const customTocItems = normalizeTocItems(
     fields?.sidebarItems || fields?.tocItems,
   );
-  const dynamicTocItems = dynamicSections
+  const dynamicTocItems = visibleDynamicSections
     .filter((s) => !s.hideFromSidebar)
     .map((s) => ({ label: s.sidebarLabel, href: `#${s.id}` }));
   const tocItems = customTocItems.length
@@ -454,7 +463,7 @@ const CaseStudy = ({ fields }: { fields: any }) => {
 
           {/* Content column */}
           <div className="lg:ml-[46px] lg:w-[822px] lg:bg-[#131315] lg:rounded-[8px] lg:px-[48px] lg:pt-[48px] lg:pb-[176px] mt-6 lg:mt-[108px]">
-            <h1 className="text-[28px] leading-[36px] tracking-[-0.56px] font-bold text-white max-w-[488px]">
+            <h1 className="text-[28px] leading-[36px] tracking-[-0.56px] font-bold text-white">
               {caseStudyTitle}
             </h1>
 
@@ -524,8 +533,8 @@ const CaseStudy = ({ fields }: { fields: any }) => {
             ) : null}
 
             {/* Dynamic sections (per-project, ordered on Contentful) */}
-            {dynamicSections.length ? (
-              dynamicSections.map((section, index) => (
+            {visibleDynamicSections.length ? (
+              visibleDynamicSections.map((section, index) => (
                 <section
                   key={section.id || index}
                   className={
